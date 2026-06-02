@@ -9,11 +9,14 @@ const riotRoutes = require('./routes/riot');
 
 const app = express();
 
-app.use(cors({
+const corsOptions = {
   origin: 'https://lol-stats-x3ln.vercel.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
-}));
+};
+
+app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'https://lol-stats-x3ln.vercel.app');
