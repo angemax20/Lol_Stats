@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="nav-item"
+     onclick="window.location.href='search.html'">
+     Invocadores
+    </div>
+    <div class="nav-item"
+    onclick="window.location.href='tierlist.html'">
+    Tier list
+    </div>
+    <div class="nav-item">Campeones</div>
+    <div class="nav-item">LeaderBoards</div>
+    <div class="nav-item" 
+    onclick="window.location.href='dashboard.html'">
+    Cuenta
+    </div>
+    <div class="nav-item">Generar torneo</div>
+  </div>
+
+  <div class="dashboard-container">
+
+    <h1 class="dashboard-title">Panel de Usuario</h1>
+
+    <div class="user-card">
+      <div id="user-info"></div>
+    </div>
+
+    <div class="actions">
+      <input type="text" id="nombre" placeholder="Nuevo nombre">
+      <button onclick="updateUser()">Actualizar nombre</button>
+      <button onclick="deleteUser()">Eliminar cuenta</button>
+      <button onclick="logout()">Cerrar sesión</button>
+    </div>
+
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config/supabase.js"></script>
+
+<script src="js/auth.js"></script>
+<script src="js/app.js"></script>
+<script src="js/admin.js"></script>
+
+<script>
+  loadUser();
+</script>
+
+  <div id="admin-section" style="display: none;">
+
+  <div class="admin-container">
+    <h2 class="admin-title">Panel de Administrador</h2>
+
+  <div class="table-container">
+    <table id="users-table">
+      <thead>
+       <tr>
+         <th>Nombre</th>
+         <th>Correo</th>
+         <th>Rol</th>
+         <th>Acciones</th>
+       </tr>
+     </thead>
+     <tbody id="users-body"></tbody>
+    </table>
+   </div>
+  </div>
+
+</div>
+
+<div id="custom-confirm" class="modal" style="display: none;">
+  <div class="modal-content">
+    <p id="modal-text">¿Seguro?</p>
+    <button class="btn-confirm" onclick="confirmAction()">Sí</button>
+    <button class="btn-cancel" onclick="closeModal()">No</button>
+  </div>
+</div>
+</body>
+</html> 
