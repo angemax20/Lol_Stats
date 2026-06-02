@@ -6,6 +6,7 @@ const cors = require('cors');
 const userRoutes = require('./routes/users');
 const adminRoutes = require('./routes/admin');
 const riotRoutes = require('./routes/riot');
+const tierlistRoutes = require('./routes/tierlist');
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/riot', riotRoutes);
+app.use('/api/tierlist', tierlistRoutes);
 
 app.get('/', (req, res) => {
   res.send('Backend funcionando');
