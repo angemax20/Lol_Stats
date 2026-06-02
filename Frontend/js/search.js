@@ -1,3 +1,7 @@
+const API_URL = process.env.NODE_ENV === 'production' 
+  ? "https://lol-stats-production.up.railway.app/api"
+  : "http://localhost:3000/api";
+
 async function searchSummoner() {
   const summonerName = document.getElementById('summoner-name').value.trim();
   const selectedRegion = document.getElementById('region-select').value; // región del desplegable
@@ -9,7 +13,7 @@ async function searchSummoner() {
 
   try {
     const response = await fetch(
-      `http://localhost:3000/api/riot/summoner/${encodeURIComponent(summonerName)}`
+      `${API_URL}/riot/summoner/${encodeURIComponent(summonerName)}`
     );
 
     if (!response.ok) {
@@ -44,7 +48,7 @@ async function searchSummoner() {
 
 async function showMatchDetails(matchId) {
   try {
-    const response = await fetch(`http://localhost:3000/api/riot/match/${matchId}`);
+    const response = await fetch(`${API_URL}/riot/match/${matchId}`);
     if (!response.ok) {
       throw new Error('Error al obtener detalles de la partida');
     }
@@ -102,7 +106,7 @@ async function showMatchDetails(matchId) {
 
 
 
-    const matchItem = document.querySelector(`.match-item[onclick="showMatchDetails('${matchId}')"]`);
+    const matchItem = document.querySelector(`.match-item[onclick="showMatchDetails('${matchId}')"]\`);
     const existingDetails = matchItem.querySelector('.match-details');
     if (existingDetails) {
       existingDetails.remove();
@@ -253,3 +257,4 @@ function getTimeAgo(date) {
   if (diffInSeconds < 604800) return `Hace ${Math.floor(diffInSeconds / 86400)} días`;
   return `Hace ${Math.floor(diffInSeconds / 604800)} semanas`;
 }
+
