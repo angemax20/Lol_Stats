@@ -3,7 +3,7 @@ async function login() {
   await supabaseClient.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: 'http://127.0.0.1:5500/dashboard.html',
+      redirectTo: 'https://lol-stats-x3ln.vercel.app/dashboard.html',
 
       queryParams: {
         prompt: 'select_account'
@@ -16,7 +16,7 @@ async function loginWith(provider) {
   await supabaseClient.auth.signInWithOAuth({
   provider: provider,
   options: {
-    redirectTo: 'http://127.0.0.1:5500/dashboard.html',
+    redirectTo: 'https://lol-stats-x3ln.vercel.app/dashboard.html',
 
     queryParams: {
       prompt: 'select_account'

@@ -9,7 +9,7 @@ async function searchSummoner() {
 
   try {
     const response = await fetch(
-      `http://localhost:3000/api/riot/summoner/${encodeURIComponent(summonerName)}`
+      `https://lol-stats-production.up.railway.app/api/riot/summoner/${encodeURIComponent(summonerName)}`
     );
 
     if (!response.ok) {
@@ -44,7 +44,7 @@ async function searchSummoner() {
 
 async function showMatchDetails(matchId) {
   try {
-    const response = await fetch(`http://localhost:3000/api/riot/match/${matchId}`);
+    const response = await fetch(`https://lol-stats-production.up.railway.app/api/riot/match/${matchId}`);
     if (!response.ok) {
       throw new Error('Error al obtener detalles de la partida');
     }

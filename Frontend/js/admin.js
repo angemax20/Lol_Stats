@@ -54,7 +54,7 @@ async function changeRole(userId, newRole) {
   const token = data.session.access_token;
 
   const res = await fetch(
-    `http://localhost:3000/api/admin/change-role`,
+    `https://lol-stats-production.up.railway.app/api/admin/change-role`,
     {
       method: 'PUT',
       headers: {
@@ -87,7 +87,7 @@ async function deleteUserByAdmin(userId) {
     const token = data.session.access_token;
 
     const res = await fetch(
-      `http://localhost:3000/api/admin/delete-user/${userId}`,
+      `https://lol-stats-production.up.railway.app/api/admin/delete-user/${userId}`,
       {
         method: 'DELETE',
         headers: {
