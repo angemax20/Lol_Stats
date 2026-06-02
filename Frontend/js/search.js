@@ -1,3 +1,7 @@
+const API_URL = process.env.NODE_ENV === 'production' 
+  ? "https://lol-stats-production.up.railway.app/api"
+  : "http://localhost:3000/api";
+
 async function searchSummoner() {
   const summonerName = document.getElementById('summoner-name').value.trim();
   const selectedRegion = document.getElementById('region-select').value; // región del desplegable
@@ -102,7 +106,7 @@ async function showMatchDetails(matchId) {
 
 
 
-    const matchItem = document.querySelector(`.match-item[onclick="showMatchDetails('${matchId}')"]`);
+    const matchItem = document.querySelector(`.match-item[onclick="showMatchDetails('${matchId}')"]\`);
     const existingDetails = matchItem.querySelector('.match-details');
     if (existingDetails) {
       existingDetails.remove();
@@ -253,3 +257,4 @@ function getTimeAgo(date) {
   if (diffInSeconds < 604800) return `Hace ${Math.floor(diffInSeconds / 86400)} días`;
   return `Hace ${Math.floor(diffInSeconds / 604800)} semanas`;
 }
+
