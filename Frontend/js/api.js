@@ -1,1 +1,1 @@
-const API_URL = "https://lol-stats-production.up.railway.app";
+const API_URL = "https://lolstats-production-a058.up.railway.app";
