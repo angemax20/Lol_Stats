@@ -1261,51 +1261,6 @@ body {
   color: #cbd5e1;
 
 }
-
-/* Navbar mejorada */
-
-.navbar {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 20px;
-
-  padding:
-    18px 35px;
-
-  background: #0f172a;
-
-  border-bottom:
-    1px solid rgba(255,255,255,0.05);
-
-  position: sticky;
-
-  top: 0;
-
-  z-index: 1000;
-
-}
-
-.nav-item {
-
-  color: #cbd5e1;
-
-  cursor: pointer;
-
-  transition: 0.2s;
-
-  font-weight: 500;
-
-}
-
-.nav-item:hover {
-
-  color: #60a5fa;
-
-}
-
 /* Responsive */
 
 @media(max-width: 768px) {
