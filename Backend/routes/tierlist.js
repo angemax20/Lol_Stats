@@ -19,12 +19,13 @@ router.get('/', async (req, res) => {
       `)
       .order('tier', { ascending: true });
 
-    if (error) {
-      console.log(error);
-      return res.status(500).json({
-        error: error.message
-      });
-    }
+   if (error) {
+    console.error('Supabase tierlist error:', error);
+    return res.status(500).json({
+    error: error.message,
+    details: error
+    });
+  } 
 
     res.json(data);
 

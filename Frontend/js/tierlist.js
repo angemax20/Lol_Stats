@@ -13,6 +13,16 @@ async function loadTierList() {
 
     console.log(data);
 
+    if (!response.ok) {
+      console.error('Error cargando tierlist:', data);
+      return;
+    }
+
+    if (!Array.isArray(data)) {
+      console.error('La respuesta de tierlist no es un array:', data);
+      return;
+    }
+
     showTierList(data);
 
   } catch(error) {
