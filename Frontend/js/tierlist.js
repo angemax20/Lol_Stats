@@ -45,12 +45,12 @@ function showTierList(champions) {
     const card =
     document.createElement('div');
 
-    card.classList.add('tier-card');
+    card.classList.add('tier-card', `tier-card-${champion.tier}`);
 
     card.innerHTML = `
 
-  <div class="tier-badge tier-${champion.tier}">
-    ${champion.tier}
+  <div class="tier-badge tier-${String(champion.tier).trim().toUpperCase()}">
+  ${String(champion.tier).trim().toUpperCase()}
   </div>
 
   <img
@@ -61,20 +61,21 @@ function showTierList(champions) {
     ${champion.champions.champion_name}
   </h3>
 
-  <p class="champion-title">
-    ${champion.champions.champion_title}
-  </p>
-
   <div class="tier-stats">
 
     <div class="stat-row">
       <span>Win Rate</span>
-      <strong>${champion.win_rate}%</strong>
+      <strong>${champion.winrate}%</strong>
     </div>
 
     <div class="stat-row">
       <span>Pick Rate</span>
-      <strong>${champion.pick_rate}%</strong>
+      <strong>${champion.pickrate}%</strong>
+    </div>
+
+    <div class="stat-row">
+      <span>Pick Rate</span>
+      <strong>${champion.banrate}%</strong>
     </div>
 
   </div>
