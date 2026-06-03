@@ -13,8 +13,8 @@ router.get('/', async (req, res) => {
         *,
         champions (
           champion_id,
-          name,
-          image
+          champion_name,
+          role
         )
       `)
       .order('tier', { ascending: true });
