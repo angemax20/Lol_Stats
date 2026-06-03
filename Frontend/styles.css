@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  height: 100vh;
-  min-height: 100%;
+  height: auto;
+  min-height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
   background: #0b0f0a;
@@ -1025,15 +1025,24 @@ body {
 ========================= */
 
 html,
+html,
 body {
+  margin: 0;
   min-height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
 .tierlist-container {
-  padding: 120px 40px 40px;
+  box-sizing: border-box;
+
+  width: 100%;
   min-height: 100vh;
+  height: auto;
+
+  padding: 160px 40px 60px;
+
+  overflow: visible;
 
   background:
   linear-gradient(
@@ -1047,17 +1056,20 @@ body {
 
 .tierlist-container h1 {
   text-align: center;
-  margin-bottom: 40px;
+
+  margin: 0 0 40px;
+
   font-size: 42px;
+
   color: #60a5fa;
+
   letter-spacing: 2px;
 }
-
-/* CONTENEDOR HORIZONTAL */
 
 #tierlist-content {
   width: 100%;
   max-width: 1400px;
+
   margin: 0 auto;
 
   display: flex;
@@ -1068,6 +1080,8 @@ body {
 
   align-items: flex-start;
   justify-content: center;
+
+  overflow: visible;
 }
 
 /* CARD */
