@@ -78,9 +78,9 @@ async function showMatchDetails(matchId) {
             <span class="champion-lane">
               <img
               class="champion-icon"
-              src="https://ddragon.leagueoflegends.com/cdn/14.10.1/img/champion/${p.champion_name}.png"
+              src="${p.champions?.image || FALLBACK_ICON}"
               width="32"
-              title="${p.champion_name}"
+              title="${p.champions?.champion_name || p.champion_name || 'Campeón desconocido'}"
               onerror="this.onerror=null; this.src='${FALLBACK_ICON}'">
               <span class="lane">${p.lane || ''}</span>
               <span class="kda">${p.kills || 0}/${p.deaths || 0}/${p.assists || 0}</span>
@@ -104,9 +104,9 @@ async function showMatchDetails(matchId) {
             <span class="champion-lane">
               <img
               class="champion-icon"
-              src="https://ddragon.leagueoflegends.com/cdn/14.10.1/img/champion/${p.champion_name}.png"
+              src="${p.champions?.image || FALLBACK_ICON}"
               width="32"
-              title="${p.champion_name}"
+              title="${p.champions?.champion_name || p.champion_name || 'Campeón desconocido'}"
               onerror="this.onerror=null; this.src='${FALLBACK_ICON}'">
               <span class="lane">${p.lane || ''}</span>
               <span class="kda">${p.kills || 0}/${p.deaths || 0}/${p.assists || 0}</span>
@@ -156,10 +156,10 @@ if (summoner.recentMatches && summoner.recentMatches.length > 0) {
             <span class="match-result ${match.win ? 'win' : 'loss'}">
               ${match.win ? 'V' : 'D'}
             </span>
-            <img src="https://ddragon.leagueoflegends.com/cdn/14.10.1/img/champion/${match.champion_name}.png" 
-                 alt="${match.champion_name}"
-                 title="${match.champion_name}"
-                 onerror="this.onerror=null; this.src='${FALLBACK_ICON}'">
+            <img src="${match.champions?.image || FALLBACK_ICON}"
+            alt="${match.champions?.champion_name || match.champion_name || 'Campeón desconocido'}"
+            title="${match.champions?.champion_name || match.champion_name || 'Campeón desconocido'}"
+            onerror="this.onerror=null; this.src='${FALLBACK_ICON}'">
           </div>
           <div class="match-item-kda">
             ${match.kills}/${match.deaths}/${match.assists}

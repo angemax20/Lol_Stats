@@ -44,7 +44,7 @@ router.get('/summoner/:name', async (req, res) => {
     const summonersWithMatches = await Promise.all(
       summoners.map(async (summoner) => {
         const matchResponse = await fetch(
-          `${SUPABASE_URL}/rest/v1/matches?summoner_id=eq.${summoner.id}&select=*&order=created_at.desc&limit=10`,
+          `${SUPABASE_URL}/rest/v1/matches?summoner_id=eq.${summoner.id}&select=*,champions(champion_id,champion_name,champion_title,image)&order=created_at.desc&limit=10`,
           {
             method: 'GET',
             headers: {
@@ -110,7 +110,7 @@ router.get('/match/:matchId', async (req, res) => {
 
   try {
     const response = await fetch(
-      `${SUPABASE_URL}/rest/v1/matches?match_id=eq.${matchId}&select=*,summoners(id,name,region,profile_icon_id,level,last_seen,soloq_tier,soloq_rank,soloq_lp,soloq_wins,soloq_losses,flex_tier,flex_rank,flex_lp,flex_wins,flex_losses)`,
+      `${SUPABASE_URL}/rest/v1/matches?match_id=eq.${matchId}&select=*,summoners(id,name,region,profile_icon_id,level,last_seen,soloq_tier,soloq_rank,soloq_lp,soloq_wins,soloq_losses,flex_tier,flex_rank,flex_lp,flex_wins,flex_losses),champions(champion_id,champion_name,champion_title,image)`,
       {
         method: 'GET',
         headers: {
@@ -157,7 +157,7 @@ router.get('/tierlist', async (req, res) => {
     res.json(tierList);
 
   } catch (error) {
-    console.error('❌ Error:', error.message);
+    console.error(' Error:', error.message);
     res.status(500).json({ error: error.message });
   }
 });
