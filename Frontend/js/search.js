@@ -1,3 +1,6 @@
+const FALLBACK_ICON =
+  'https://ddragon.leagueoflegends.com/cdn/14.10.1/img/profileicon/29.png';
+
 async function searchSummoner() {
   const summonerName = document.getElementById('summoner-name').value.trim();
   const selectedRegion = document.getElementById('region-select').value; // región del desplegable
@@ -66,11 +69,19 @@ async function showMatchDetails(matchId) {
         ${redTeam.map(p => `
           <li>
             <span>
-              <img src="https://ddragon.leagueoflegends.com/cdn/14.10.1/img/profileicon/${p.summoners?.profile_icon_id || 0}.png" width="32">
+              <img
+              src="https://ddragon.leagueoflegends.com/cdn/14.10.1/img/profileicon/${p.summoners?.profile_icon_id || 29}.png"
+              width="32"
+              onerror="this.onerror=null; this.src='${FALLBACK_ICON}'">
               ${p.summoners?.name || 'Desconocido'} 
             </span>
             <span class="champion-lane">
-              <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.10.1/img/champion/${p.champion_name}.png" width="32" title="${p.champion_name}">
+              <img
+              class="champion-icon"
+              src="https://ddragon.leagueoflegends.com/cdn/14.10.1/img/champion/${p.champion_name}.png"
+              width="32"
+              title="${p.champion_name}"
+              onerror="this.onerror=null; this.src='${FALLBACK_ICON}'">
               <span class="lane">${p.lane || ''}</span>
               <span class="kda">${p.kills || 0}/${p.deaths || 0}/${p.assists || 0}</span>
             </span>
@@ -84,11 +95,19 @@ async function showMatchDetails(matchId) {
         ${blueTeam.map(p => `
           <li>
             <span>
-              <img src="https://ddragon.leagueoflegends.com/cdn/14.10.1/img/profileicon/${p.summoners?.profile_icon_id || 0}.png" width="32">
+              <img
+              src="https://ddragon.leagueoflegends.com/cdn/14.10.1/img/profileicon/${p.summoners?.profile_icon_id || 29}.png"
+              width="32"
+              onerror="this.onerror=null; this.src='${FALLBACK_ICON}'">
               ${p.summoners?.name || 'Desconocido'} 
             </span>
             <span class="champion-lane">
-              <img class="champion-icon" src="https://ddragon.leagueoflegends.com/cdn/14.10.1/img/champion/${p.champion_name}.png" width="32" title="${p.champion_name}">
+              <img
+              class="champion-icon"
+              src="https://ddragon.leagueoflegends.com/cdn/14.10.1/img/champion/${p.champion_name}.png"
+              width="32"
+              title="${p.champion_name}"
+              onerror="this.onerror=null; this.src='${FALLBACK_ICON}'">
               <span class="lane">${p.lane || ''}</span>
               <span class="kda">${p.kills || 0}/${p.deaths || 0}/${p.assists || 0}</span>
             </span>
@@ -139,7 +158,8 @@ if (summoner.recentMatches && summoner.recentMatches.length > 0) {
             </span>
             <img src="https://ddragon.leagueoflegends.com/cdn/14.10.1/img/champion/${match.champion_name}.png" 
                  alt="${match.champion_name}"
-                 title="${match.champion_name}">
+                 title="${match.champion_name}"
+                 onerror="this.onerror=null; this.src='${FALLBACK_ICON}'">
           </div>
           <div class="match-item-kda">
             ${match.kills}/${match.deaths}/${match.assists}
@@ -162,9 +182,10 @@ if (summoner.recentMatches && summoner.recentMatches.length > 0) {
       <div class="summoner-main">
         <div class="summoner-card">
           <img
-            src="https://ddragon.leagueoflegends.com/cdn/14.10.1/img/profileicon/${summoner.profile_icon_id}.png"
+            src="https://ddragon.leagueoflegends.com/cdn/14.10.1/img/profileicon/${summoner.profile_icon_id || 29}.png"
             width="120"
             alt="${summoner.name}"
+            onerror="this.onerror=null; this.src='${FALLBACK_ICON}'"
           >
           <h2>${summoner.name}${summoner.tag_line ? '#' + summoner.tag_line : ''}</h2>
           <p class="summoner-level">Nivel: ${summoner.level}</p>
