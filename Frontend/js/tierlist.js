@@ -23,7 +23,19 @@ async function loadTierList() {
       return;
     }
 
-    showTierList(data);
+    const tierOrder = {
+    S: 1,
+    A: 2,
+    B: 3,
+    C: 4,
+    D: 5
+  };
+
+  data.sort((a, b) => {
+    return tierOrder[a.tier] - tierOrder[b.tier];
+  });
+
+  showTierList(data);
 
   } catch(error) {
 

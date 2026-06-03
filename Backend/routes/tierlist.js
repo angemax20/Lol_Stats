@@ -17,8 +17,7 @@ router.get('/', async (req, res) => {
           role,
           image
         )
-      `)
-      .order('tier', { ascending: true });
+      `);
 
    if (error) {
     console.error('Supabase tierlist error:', error);

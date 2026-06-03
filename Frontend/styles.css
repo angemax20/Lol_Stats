@@ -1,6 +1,9 @@
 body {
   margin: 0;
   height: 100vh;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   background: #0b0f0a;
   font-family: Arial, sans-serif;
   padding-top: 70px;
@@ -1029,7 +1032,7 @@ body {
 }
 
 .tierlist-container {
-  padding: 40px;
+  padding: 120px 40px 40px;
   min-height: 100vh;
 
   background:
