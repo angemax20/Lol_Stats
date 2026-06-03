@@ -1,36 +1,36 @@
 const express = require('express');
 const router = express.Router();
 
-const supabase =
-require('../config/supabase');
+const supabase = require('../supabase');
 
-// OBTENER TIER LIST
 router.get('/', async (req, res) => {
 
   try {
 
-    const { data, error } =
-    await supabase
-      .from('tierlists')
+    const { data, error } = await supabase
+      .from('tierlist')
       .select(`
         *,
         champions (
-          champion_name,
-          champion_title,
-          role
+          champion_id,
+          name,
+          image
         )
       `)
       .order('tier', { ascending: true });
 
     if (error) {
-      throw error;
+      console.log(error);
+      return res.status(500).json({
+        error: error.message
+      });
     }
 
     res.json(data);
 
-  } catch (error) {
+  } catch(err) {
 
-    console.error(error);
+    console.log(err);
 
     res.status(500).json({
       error: 'Error obteniendo tier list'
