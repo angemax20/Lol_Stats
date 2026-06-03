@@ -66,7 +66,9 @@ function showTierList(champions) {
   </div>
 
   <img
-  src="https://ddragon.leagueoflegends.com/cdn/14.10.1/img/champion/${champion.champions.champion_name}.png"
+  src="${champion.champions.image || 'https://ddragon.leagueoflegends.com/cdn/14.10.1/img/profileicon/29.png'}"
+  alt="${champion.champions.champion_name}"
+  onerror="this.src='https://ddragon.leagueoflegends.com/cdn/14.10.1/img/profileicon/29.png'"
   >
 
   <h3>
