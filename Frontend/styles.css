@@ -331,6 +331,65 @@ body {
   border-radius: 10px;
 }
 
+.toast-message {
+  position: fixed;
+
+  top: 95px;
+  left: 50%;
+
+  transform: translateX(-50%) translateY(-16px);
+
+  min-width: 280px;
+  max-width: min(520px, calc(100% - 32px));
+
+  padding: 14px 20px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #102015 0%,
+      #07110a 100%
+    );
+
+  border: 1px solid rgba(141, 252, 63, 0.4);
+  border-radius: 14px;
+
+  color: #caff9a;
+
+  text-align: center;
+  font-size: 15px;
+  font-weight: 800;
+
+  box-shadow:
+    0 0 24px rgba(141, 252, 63, 0.25),
+    0 12px 30px rgba(0, 0, 0, 0.5);
+
+  opacity: 0;
+  pointer-events: none;
+
+  z-index: 3000;
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.toast-message.visible {
+  opacity: 1;
+
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast-message.error {
+  color: #ffb4b4;
+
+  border-color: rgba(255, 77, 77, 0.45);
+
+  box-shadow:
+    0 0 24px rgba(255, 77, 77, 0.18),
+    0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
 /* // NAVBAR / TODAS LAS PESTAÑAS */
 .navbar {
   position: fixed;

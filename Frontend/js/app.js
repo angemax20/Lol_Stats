@@ -15,9 +15,7 @@ async function updateUser() {
     return;
   }
 
-  clearSearchError();
-
-  showSearchError('Nombre actualizado.');
+  showToast('Nombre actualizado correctamente.');
 
   await loadUser();
 }
@@ -34,6 +32,13 @@ function deleteUser() {
 
     logout();
   });
+
+  showToast('Cuenta eliminada correctamente.');
+
+  setTimeout(() => {
+  window.location.href = 'index.html';
+  }, 1200);
+
 }
 loadUser();
 

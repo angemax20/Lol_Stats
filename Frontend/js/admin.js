@@ -104,9 +104,7 @@ async function deleteUserByAdmin(userId) {
       return;
     }
 
-    clearSearchError();
-
-    showSearchError('Usuario eliminado.');
+    showToast('Usuario eliminado correctamente.');
 
     loadAllUsers();
   });
