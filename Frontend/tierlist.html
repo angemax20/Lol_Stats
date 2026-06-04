@@ -30,6 +30,22 @@
 
     <h1>Tier List</h1>
 
+    <div class="tierlist-controls">
+      <button onclick="setTierSort('tier')">Tier</button>
+      <button onclick="setTierSort('asc')">Ascendente</button>
+      <button onclick="setTierSort('desc')">Descendente</button>
+      <button onclick="setTierSort('alpha')">A-Z</button>
+
+      <select id="role-filter" onchange="setRoleFilter(this.value)">
+        <option value="all">Todas las líneas</option>
+        <option value="Top">Top</option>
+        <option value="Jungle">Jungle</option>
+        <option value="Mid">Mid</option>
+        <option value="ADC">ADC</option>
+        <option value="Support">Support</option>
+      </select>
+    </div>
+
     <div id="tierlist-content">
 
     </div>

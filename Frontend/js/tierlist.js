@@ -1,15 +1,14 @@
 const API_URL =
 'https://lolstats-production-a058.up.railway.app/api';
 
+let allChampions = [];
+let currentSort = 'tier';
+let currentRole = 'all';
+
 async function loadTierList() {
-
   try {
-
-    const response =
-    await fetch(`${API_URL}/tierlist`);
-
-    const data =
-    await response.json();
+    const response = await fetch(`${API_URL}/tierlist`);
+    const data = await response.json();
 
     console.log(data);
 
@@ -23,7 +22,35 @@ async function loadTierList() {
       return;
     }
 
-    const tierOrder = {
+    allChampions = data;
+
+    renderTierList();
+
+  } catch(error) {
+    console.error(error);
+  }
+}
+
+function setTierSort(sortType) {
+  currentSort = sortType;
+  renderTierList();
+}
+
+function setRoleFilter(role) {
+  currentRole = role;
+  renderTierList();
+}
+
+function renderTierList() {
+  let champions = [...allChampions];
+
+  if (currentRole !== 'all') {
+    champions = champions.filter(champion => {
+      return champion.role === currentRole;
+    });
+  }
+
+  const tierOrder = {
     S: 1,
     A: 2,
     B: 3,
@@ -31,18 +58,34 @@ async function loadTierList() {
     D: 5
   };
 
-  data.sort((a, b) => {
-    return tierOrder[a.tier] - tierOrder[b.tier];
-  });
-
-  showTierList(data);
-
-  } catch(error) {
-
-    console.error(error);
-
+  if (currentSort === 'tier') {
+    champions.sort((a, b) => {
+      return tierOrder[a.tier] - tierOrder[b.tier];
+    });
   }
 
+  if (currentSort === 'asc') {
+    champions.sort((a, b) => {
+      return Number(a.winrate || a.win_rate || 0) - Number(b.winrate || b.win_rate || 0);
+    });
+  }
+
+  if (currentSort === 'desc') {
+    champions.sort((a, b) => {
+      return Number(b.winrate || b.win_rate || 0) - Number(a.winrate || a.win_rate || 0);
+    });
+  }
+
+  if (currentSort === 'alpha') {
+    champions.sort((a, b) => {
+      const nameA = a.champions?.champion_name || '';
+      const nameB = b.champions?.champion_name || '';
+
+      return nameA.localeCompare(nameB);
+    });
+  }
+
+  showTierList(champions);
 }
 
 function showTierList(champions) {

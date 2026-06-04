@@ -1531,6 +1531,65 @@ body {
   color: #caff9a;
 }
 
+.tierlist-controls {
+  width: min(1000px, 100%);
+
+  margin: 0 auto 34px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.tierlist-controls button,
+.tierlist-controls select {
+  height: 42px;
+
+  padding: 0 16px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #102015 0%,
+      #07110a 100%
+    );
+
+  border: 1px solid rgba(141, 252, 63, 0.35);
+  border-radius: 12px;
+
+  color: #caff9a;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0 14px rgba(141, 252, 63, 0.12);
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tierlist-controls button:hover,
+.tierlist-controls select:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(141, 252, 63, 0.7);
+
+  box-shadow:
+    0 0 22px rgba(141, 252, 63, 0.24);
+}
+
+.tierlist-controls select {
+  min-width: 170px;
+
+  outline: none;
+}
+
 /* Responsive */
 
 @media(max-width: 768px) {
