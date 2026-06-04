@@ -5,8 +5,10 @@ async function searchSummoner() {
   const summonerName = document.getElementById('summoner-name').value.trim();
   const selectedRegion = document.getElementById('region-select').value; // región del desplegable
 
+  clearSearchError();
+
   if (!summonerName) {
-    alert('Debes escribir el nombre del invocador');
+    showSearchError('Debes escribir el nombre del invocador.');
     return;
   }
 
@@ -14,11 +16,6 @@ async function searchSummoner() {
     const response = await fetch(
       `https://lolstats-production-a058.up.railway.app/api/riot/summoner/${encodeURIComponent(summonerName)}`
     );
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || 'Error al buscar invocador');
-    }
 
     const data = await response.json();
     console.log('Datos del invocador:', data);
@@ -40,7 +37,7 @@ async function searchSummoner() {
 
   } catch (error) {
     console.error('Error:', error);
-    alert(error.message || 'Error al buscar el invocador');
+    showSearchError(error.message || 'No se encontró el invocador.');
   }
 }
 

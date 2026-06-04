@@ -1186,6 +1186,44 @@ body {
   margin-bottom: 10px;
 }
 
+.search-error {
+  width: min(900px, 100%);
+
+  margin-top: 18px;
+  padding: 0;
+
+  max-height: 0;
+  overflow: hidden;
+
+  color: #ffb4b4;
+  background: rgba(60, 8, 8, 0.75);
+
+  border: 1px solid rgba(255, 77, 77, 0.35);
+  border-radius: 14px;
+
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+
+  box-shadow:
+    0 0 18px rgba(255, 77, 77, 0.16);
+
+  opacity: 0;
+
+  transition:
+    opacity 0.2s ease,
+    max-height 0.2s ease,
+    padding 0.2s ease;
+}
+
+.search-error.visible {
+  max-height: 90px;
+
+  padding: 14px 18px;
+
+  opacity: 1;
+}
+
 /* // TIER LIST */
 
 html,

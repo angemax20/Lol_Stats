@@ -15,7 +15,10 @@ async function updateUser() {
     return;
   }
 
-  alert("Nombre actualizado");
+  clearSearchError();
+
+  showSearchError('Nombre actualizado.');
+
   await loadUser();
 }
 
