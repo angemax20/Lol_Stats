@@ -52,7 +52,7 @@ async function searchSummoner() {
 
     if (summoner.region.toLowerCase() !== selectedRegion.toLowerCase()) {
       showSearchError(
-        `Invocador no encontrado ${summoner.region}, no en ${selectedRegion}.`
+        `Invocador no encontrado.`
       );
       return;
     }
