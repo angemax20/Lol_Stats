@@ -1587,9 +1587,20 @@ body {
 .tierlist-controls select {
   min-width: 170px;
 
+  background: #020403;
+
+  color: #caff9a;
+
+  border: 1px solid rgba(141, 252, 63, 0.45);
+
   outline: none;
 }
 
+.tierlist-controls select option {
+  background: #020403;
+
+  color: #caff9a;
+}
 /* Responsive */
 
 @media(max-width: 768px) {
