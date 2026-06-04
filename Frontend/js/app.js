@@ -32,13 +32,6 @@ function deleteUser() {
 
     logout();
   });
-
-  showToast('Cuenta eliminada correctamente.');
-
-  setTimeout(() => {
-  window.location.href = 'index.html';
-  }, 1200);
-
 }
 loadUser();
 
@@ -57,4 +50,9 @@ function closeModal() {
 function confirmAction() {
   if (actionToConfirm) actionToConfirm();
   closeModal();
+  showToast('Cuenta eliminada correctamente.');
+
+  setTimeout(() => {
+  window.location.href = 'index.html';
+  }, 1200);
 }
