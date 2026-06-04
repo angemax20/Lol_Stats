@@ -991,18 +991,6 @@ body {
   font-size: 18px;
 }
 
-#summoner-result {
-  width: 100%;
-  max-width: 1200px;
-  margin: 32px auto 0;
-}
-
-.search-error {
-  width: min(900px, 100%);
-  margin: 18px auto 0;
-  flex: 0 0 auto;
-}
-
 /* Lista de partidas en sidebar */
 .matches-list {
   display: flex;
