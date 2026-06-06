@@ -1623,3 +1623,281 @@ body {
     flex: 0 1 320px;
   }
 }
+
+/* // PESTAÑA CAMPEONES */
+
+.champions-page {
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 150px 40px 60px;
+
+  background: #020403;
+
+  color: white;
+}
+
+.champions-title {
+  margin: 0 0 38px;
+
+  text-align: center;
+
+  font-size: 44px;
+
+  color: #8dfc3f;
+
+  text-shadow:
+    0 0 12px rgba(141, 252, 63, 0.65),
+    0 0 28px rgba(141, 252, 63, 0.35);
+}
+
+.champions-gallery {
+  width: 100%;
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 18px;
+}
+
+.champion-gallery-card {
+  padding: 14px 10px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #102015 0%,
+      #07110a 100%
+    );
+
+  border: 1px solid rgba(141, 252, 63, 0.25);
+  border-radius: 14px;
+
+  color: #caff9a;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.champion-gallery-card:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(141, 252, 63, 0.65);
+
+  box-shadow:
+    0 0 22px rgba(141, 252, 63, 0.22);
+}
+
+.champion-gallery-card img {
+  width: 72px;
+  height: 72px;
+
+  border-radius: 14px;
+
+  object-fit: cover;
+
+  border: 2px solid rgba(141, 252, 63, 0.45);
+}
+
+.champion-gallery-card span {
+  display: block;
+
+  margin-top: 10px;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.build-modal {
+  position: fixed;
+  inset: 0;
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  padding: 24px;
+
+  background: rgba(0, 0, 0, 0.78);
+
+  z-index: 4000;
+}
+
+.build-modal.visible {
+  display: flex;
+}
+
+.build-modal-content {
+  position: relative;
+
+  width: min(760px, 100%);
+  max-height: 85vh;
+
+  overflow-y: auto;
+
+  padding: 28px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #102015 0%,
+      #050906 100%
+    );
+
+  border: 1px solid rgba(141, 252, 63, 0.35);
+  border-radius: 18px;
+
+  color: white;
+
+  box-shadow:
+    0 0 32px rgba(141, 252, 63, 0.22),
+    0 20px 60px rgba(0, 0, 0, 0.7);
+}
+
+.build-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid rgba(141, 252, 63, 0.35);
+  border-radius: 50%;
+
+  background: #020403;
+
+  color: #caff9a;
+
+  font-size: 22px;
+
+  cursor: pointer;
+}
+
+.build-header {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+
+  margin-bottom: 26px;
+}
+
+.build-header img {
+  width: 92px;
+  height: 92px;
+
+  border-radius: 18px;
+
+  border: 3px solid rgba(141, 252, 63, 0.5);
+}
+
+.build-header h2 {
+  margin: 0 0 6px;
+
+  color: #8dfc3f;
+
+  font-size: 30px;
+}
+
+.build-header p {
+  margin: 0 0 10px;
+
+  color: #9fb69d;
+}
+
+.build-header span {
+  display: inline-block;
+
+  padding: 7px 12px;
+
+  border-radius: 999px;
+
+  background: rgba(141, 252, 63, 0.12);
+
+  color: #caff9a;
+}
+
+.build-section {
+  margin-top: 24px;
+}
+
+.build-section h3 {
+  margin: 0 0 14px;
+
+  color: #8dfc3f;
+
+  font-size: 20px;
+}
+
+.build-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.build-icon {
+  width: 92px;
+
+  text-align: center;
+}
+
+.build-icon img {
+  width: 54px;
+  height: 54px;
+
+  border-radius: 12px;
+
+  object-fit: cover;
+
+  border: 1px solid rgba(141, 252, 63, 0.35);
+}
+
+.build-icon small {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #cbd5c0;
+
+  font-size: 11px;
+}
+
+.build-empty {
+  color: #ffb4b4;
+
+  text-align: center;
+
+  font-weight: 700;
+}
+
+@media(max-width: 768px) {
+  .champions-page {
+    padding: 130px 18px 40px;
+  }
+
+  .champions-title {
+    font-size: 34px;
+  }
+
+  .champions-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 12px;
+  }
+
+  .champion-gallery-card img {
+    width: 58px;
+    height: 58px;
+  }
+
+  .build-header {
+    flex-direction: column;
+
+    text-align: center;
+  }
+}
