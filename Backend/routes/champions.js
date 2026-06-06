@@ -93,4 +93,4 @@ router.get('/:championId/build', async (req, res) => {
   }
 });
 
-module.exports = router;s
+module.exports = routers;
