@@ -71,6 +71,28 @@ async function searchSummoner() {
   }
 }
 
+function renderBuildIcons(title, list, nameKey) {
+  if (!list || list.length === 0) {
+    return '';
+  }
+
+  return `
+    <div class="match-build-group">
+      <span>${title}</span>
+      <div class="match-build-icons">
+        ${list.map(entry => `
+          <img
+            src="${entry.image || FALLBACK_ICON}"
+            alt="${entry[nameKey] || title}"
+            title="${entry[nameKey] || title}"
+            onerror="this.onerror=null; this.src='${FALLBACK_ICON}'"
+          >
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
 async function showMatchDetails(matchId) {
   try {
     const response = await fetch(
@@ -116,6 +138,13 @@ async function showMatchDetails(matchId) {
                   <span class="lane">${p.lane || ''}</span>
                   <span class="kda">${p.kills || 0}/${p.deaths || 0}/${p.assists || 0}</span>
                 </span>
+                
+                <div class="match-player-build">
+                  ${renderBuildIcons('Items', p.items, 'item_name')}
+                  ${renderBuildIcons('Runas', p.primaryRunes, 'rune_name')}
+                  ${renderBuildIcons('Secundarias', p.secondaryRunes, 'rune_name')}
+                  ${renderBuildIcons('Hechizos', p.spells, 'spell_name')}
+                </div>
               </li>
             `).join('')}
           </ul>

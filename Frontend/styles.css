@@ -1070,6 +1070,43 @@ body {
   color: #a09b8c;
 }
 
+.match-player-build {
+  width: 100%;
+
+  margin-top: 8px;
+
+  display: grid;
+  gap: 6px;
+}
+
+.match-build-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  color: #caff9a;
+
+  font-size: 12px;
+}
+
+.match-build-icons {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.match-build-icons img {
+  width: 24px;
+  height: 24px;
+
+  border-radius: 6px;
+
+  object-fit: cover;
+
+  border: 1px solid rgba(141, 252, 63, 0.35);
+}
+
 /* Card del summoner */
 .summoner-card {
   background: rgba(18, 16, 12, 0.95);

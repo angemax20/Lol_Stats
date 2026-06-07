@@ -114,8 +114,8 @@ router.get('/match/:matchId', async (req, res) => {
       {
         method: 'GET',
         headers: {
-          'apikey': SUPABASE_KEY,
-          'Authorization': `Bearer ${SUPABASE_KEY}`
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${SUPABASE_KEY}`
         }
       }
     );
@@ -126,7 +126,49 @@ router.get('/match/:matchId', async (req, res) => {
       return res.status(500).json({ error: 'Error al obtener jugadores de la partida' });
     }
 
-    res.json(players);
+    const itemIds = [...new Set(players.flatMap(p => p.item_ids || []))];
+    const primaryRuneIds = [...new Set(players.flatMap(p => p.rune_ids || []))];
+    const secondaryRuneIds = [...new Set(players.flatMap(p => p.secondary_rune_ids || []))];
+    const spellIds = [...new Set(players.flatMap(p => p.spell_ids || []))];
+
+    const allRuneIds = [...new Set([...primaryRuneIds, ...secondaryRuneIds])];
+
+    const fetchTable = async (table, column, ids) => {
+      if (!ids.length) return [];
+
+      const tableResponse = await fetch(
+        `${SUPABASE_URL}/rest/v1/${table}?${column}=in.(${ids.join(',')})&select=*`,
+        {
+          method: 'GET',
+          headers: {
+            apikey: SUPABASE_KEY,
+            Authorization: `Bearer ${SUPABASE_KEY}`
+          }
+        }
+      );
+
+      return await tableResponse.json();
+    };
+
+    const [items, runes, spells] = await Promise.all([
+      fetchTable('items', 'item_id', itemIds),
+      fetchTable('runes', 'rune_id', allRuneIds),
+      fetchTable('spells', 'spell_id', spellIds)
+    ]);
+
+    const itemMap = Object.fromEntries(items.map(item => [item.item_id, item]));
+    const runeMap = Object.fromEntries(runes.map(rune => [rune.rune_id, rune]));
+    const spellMap = Object.fromEntries(spells.map(spell => [spell.spell_id, spell]));
+
+    const enrichedPlayers = players.map(player => ({
+      ...player,
+      items: (player.item_ids || []).map(id => itemMap[id]).filter(Boolean),
+      primaryRunes: (player.rune_ids || []).map(id => runeMap[id]).filter(Boolean),
+      secondaryRunes: (player.secondary_rune_ids || []).map(id => runeMap[id]).filter(Boolean),
+      spells: (player.spell_ids || []).map(id => spellMap[id]).filter(Boolean)
+    }));
+
+    res.json(enrichedPlayers);
 
   } catch (error) {
     console.error(' Error:', error.message);
