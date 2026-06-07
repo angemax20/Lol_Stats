@@ -78,7 +78,6 @@ function renderBuildIcons( list, nameKey) {
 
   return `
     <div class="match-build-group">
-      <span>${title}</span>
       <div class="match-build-icons">
         ${list.map(entry => `
           <img
