@@ -138,12 +138,12 @@ async function showMatchDetails(matchId) {
                   <span class="lane">${p.lane || ''}</span>
                   <span class="kda">${p.kills || 0}/${p.deaths || 0}/${p.assists || 0}</span>
                 </span>
-                
+
                 <div class="match-player-build">
-                  ${renderBuildIcons('Items', p.items, 'item_name')}
-                  ${renderBuildIcons('Runas', p.primaryRunes, 'rune_name')}
-                  ${renderBuildIcons('Secundarias', p.secondaryRunes, 'rune_name')}
-                  ${renderBuildIcons('Hechizos', p.spells, 'spell_name')}
+                  ${renderBuildIcons('Items', 'item_name')}
+                  ${renderBuildIcons('Runas', 'rune_name')}
+                  ${renderBuildIcons('Secundarias', 'rune_name')}
+                  ${renderBuildIcons('Hechizos', 'spell_name')}
                 </div>
               </li>
             `).join('')}
@@ -173,7 +173,15 @@ async function showMatchDetails(matchId) {
                     onerror="this.onerror=null; this.src='${FALLBACK_ICON}'"
                   >
                   <span class="lane">${p.lane || ''}</span>
-                  <span class="kda">${p.kills || 0}/${p.deaths || 0}/${p.assists || 0}</span>
+                  <span class="kda">${p.kills || 0}/${p.deaths || 0}/${p.assists || 0}
+                </span>
+
+                <div class="match-player-build">
+                  ${renderBuildIcons('Items', 'item_name')}
+                  ${renderBuildIcons('Runas', 'rune_name')}
+                  ${renderBuildIcons('Secundarias', 'rune_name')}
+                  ${renderBuildIcons('Hechizos', 'spell_name')}
+                </div>
                 </span>
               </li>
             `).join('')}
