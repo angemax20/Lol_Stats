@@ -71,7 +71,7 @@ async function searchSummoner() {
   }
 }
 
-function renderBuildIcons(title, list, nameKey) {
+function renderBuildIcons( list, nameKey) {
   if (!list || list.length === 0) {
     return '';
   }
@@ -83,8 +83,7 @@ function renderBuildIcons(title, list, nameKey) {
         ${list.map(entry => `
           <img
             src="${entry.image || FALLBACK_ICON}"
-            alt="${entry[nameKey] || title}"
-            title="${entry[nameKey] || title}"
+            alt="${entry[nameKey]}"
             onerror="this.onerror=null; this.src='${FALLBACK_ICON}'"
           >
         `).join('')}
