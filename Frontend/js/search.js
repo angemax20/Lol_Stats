@@ -140,10 +140,10 @@ async function showMatchDetails(matchId) {
                 </span>
 
                 <div class="match-player-build">
-                  ${renderBuildIcons('Items', 'item_name')}
-                  ${renderBuildIcons('Runas', 'rune_name')}
-                  ${renderBuildIcons('Secundarias', 'rune_name')}
-                  ${renderBuildIcons('Hechizos', 'spell_name')}
+                  ${renderBuildIcons( p.items, 'item_name')}
+                  ${renderBuildIcons( p.primaryRune, 'rune_name')}
+                  ${renderBuildIcons( p.secondaryRune, 'rune_name')}
+                  ${renderBuildIcons( p.spells, 'spell_name')}
                 </div>
               </li>
             `).join('')}
@@ -177,10 +177,10 @@ async function showMatchDetails(matchId) {
                 </span>
 
                 <div class="match-player-build">
-                  ${renderBuildIcons('Items', 'item_name')}
-                  ${renderBuildIcons('Runas', 'rune_name')}
-                  ${renderBuildIcons('Secundarias', 'rune_name')}
-                  ${renderBuildIcons('Hechizos', 'spell_name')}
+                  ${renderBuildIcons( p.items, 'item_name')}
+                  ${renderBuildIcons( p.primaryRune, 'rune_name')}
+                  ${renderBuildIcons( p.secondaryRune, 'rune_name')}
+                  ${renderBuildIcons( p.spells, 'spell_name')}
                 </div>
                 </span>
               </li>
