@@ -77,8 +77,7 @@ function renderBuildIcons(title, list, nameKey) {
   }
 
   return `
-    <div class="match-build-group">
-      <span>${title}</span>
+    <div class="match-build-group" aria-label="${title}" title="${title}">
       <div class="match-build-icons">
         ${list.map(entry => `
           <img
@@ -174,7 +173,7 @@ async function showMatchDetails(matchId) {
                     onerror="this.onerror=null; this.src='${FALLBACK_ICON}'"
                   >
                   <span class="lane">${p.lane || ''}</span>
-                  <span class="kda">${p.kills || 0}/${p.deaths || 0}/${p.assists || 0}
+                  <span class="kda">${p.kills || 0}/${p.deaths || 0}/${p.assists || 0}</span>
                 </span>
 
                 <div class="match-player-build">
@@ -184,7 +183,6 @@ async function showMatchDetails(matchId) {
                   ${renderBuildIcons('Secundarias', p.secondaryRunes, 'rune_name')}
                   ${renderBuildIcons('Hechizos', p.spells, 'spell_name')}
                 </div>
-                </span>
               </li>
             `).join('')}
           </ul>
