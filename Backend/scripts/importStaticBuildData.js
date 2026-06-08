@@ -41,7 +41,8 @@ async function main() {
           rune_name: rune.name,
           image: `https://ddragon.leagueoflegends.com/cdn/img/${rune.icon}`,
           rune_tree: tree.name,
-          is_keystone: slotIndex === 0
+          is_keystone: slotIndex === 0,
+          rune_slot: slotIndex
         });
       });
     });

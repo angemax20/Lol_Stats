@@ -141,6 +141,7 @@ async function showMatchDetails(matchId) {
 
                 <div class="match-player-build">
                   ${renderBuildIcons('Items', p.items, 'item_name')}
+                  ${renderBuildIcons('Principal', p.primaryRune ? [p.primaryRune] : [], 'rune_name')}
                   ${renderBuildIcons('Runas', p.primaryRunes, 'rune_name')}
                   ${renderBuildIcons('Secundarias', p.secondaryRunes, 'rune_name')}
                   ${renderBuildIcons('Hechizos', p.spells, 'spell_name')}
@@ -178,6 +179,7 @@ async function showMatchDetails(matchId) {
 
                 <div class="match-player-build">
                   ${renderBuildIcons('Items', p.items, 'item_name')}
+                  ${renderBuildIcons('Principal', p.primaryRune ? [p.primaryRune] : [], 'rune_name')}
                   ${renderBuildIcons('Runas', p.primaryRunes, 'rune_name')}
                   ${renderBuildIcons('Secundarias', p.secondaryRunes, 'rune_name')}
                   ${renderBuildIcons('Hechizos', p.spells, 'spell_name')}
