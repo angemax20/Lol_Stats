@@ -173,7 +173,7 @@ async function showMatchDetails(matchId) {
                     onerror="this.onerror=null; this.src='${FALLBACK_ICON}'"
                   >
                   <span class="lane">${p.lane || ''}</span>
-                  <span class="kda">${p.kills || 0}/${p.deaths || 0}/${p.assists || 0}</span>
+                  <span class="kda">${p.kills || 0}/${p.deaths || 0}/${p.assists || 0}
                 </span>
 
                 <div class="match-player-build">
@@ -183,6 +183,7 @@ async function showMatchDetails(matchId) {
                   ${renderBuildIcons('Secundarias', p.secondaryRunes, 'rune_name')}
                   ${renderBuildIcons('Hechizos', p.spells, 'spell_name')}
                 </div>
+                </span>
               </li>
             `).join('')}
           </ul>
