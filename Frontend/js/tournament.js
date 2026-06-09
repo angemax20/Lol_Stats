@@ -227,9 +227,11 @@ function createBracket(firstRoundMatches) {
 }
 
 function renderBracket(bracket) {
-  showOnlyStep('step-bracket');
+  const bracketContainer = document.getElementById('bracket');
 
-  document.getElementById('step-bracket').classList.remove('hidden');
+  if (!bracketContainer) return;
+
+  showOnlyStep('step-bracket');
 
   bracketContainer.innerHTML = bracket.map((round, roundIndex) => `
     <div class="bracket-round">
