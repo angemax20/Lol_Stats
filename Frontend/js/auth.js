@@ -28,6 +28,7 @@ async function loginWith(provider) {
 // LOGOUT
 async function logout() {
   await supabaseClient.auth.signOut();
+  localStorage.removeItem('user_id');
   location.reload();
 }
 
@@ -62,6 +63,8 @@ async function loadUser() {
 
   // NO logeado
   if (!user) {
+   localStorage.removeItem('user_id');
+
    if (loginSection) loginSection.style.display = 'block';
    if (adminSection) adminSection.style.display = 'none';
    return;
@@ -98,6 +101,9 @@ async function loadUser() {
     // volver a cargar después de crear
     return loadUser();
   }
+
+  // Guardar id del usuario para otras pestañas
+  localStorage.setItem('user_id', data.id);
 
   // Mostrar datos
   const userInfo = document.getElementById('user-info');
