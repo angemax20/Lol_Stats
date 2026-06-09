@@ -37,11 +37,36 @@
     <h1 class="leaderboard-title">Leaderboard</h1>
 
     <div class="leaderboard-controls">
-      <select id="leaderboard-tier" class="leaderboard-tier-select" onchange="loadLeaderboard()">
+    <select
+        id="leaderboard-tier"
+        class="leaderboard-tier-select"
+        onchange="loadLeaderboard()"
+        >
         <option value="Retador">Retador</option>
         <option value="Gran Maestro">Gran Maestro</option>
         <option value="Maestro">Maestro</option>
-      </select>
+    </select>
+
+    <select
+        id="leaderboard-region"
+        class="leaderboard-tier-select"
+        onchange="loadLeaderboard()"
+        >
+        <option value="all">Todas las regiones</option>
+        <option value="LAN">LAN</option>
+        <option value="LAS">LAS</option>
+        <option value="NA">NA</option>
+        <option value="EUW">EUW</option>
+        <option value="KR">KR</option>
+    </select>
+
+    <input
+        type="text"
+        id="leaderboard-search"
+        class="leaderboard-search-input"
+        placeholder="Buscar invocador"
+        autocomplete="off"
+        >
     </div>
 
     <section class="leaderboard-panel">

@@ -5,13 +5,14 @@ const supabase = require('../config/supabase');
 
 router.get('/', async (req, res) => {
   try {
-    const { tier = 'Retador' } = req.query;
+    const { tier = 'Retador', region = 'all' } = req.query;
 
-    const { data, error } = await supabase
+    let query = supabase
       .from('summoners')
       .select(`
         id,
         name,
+        tag_line,
         region,
         profile_icon_id,
         level,
@@ -24,6 +25,12 @@ router.get('/', async (req, res) => {
       .eq('soloq_tier', tier)
       .order('soloq_lp', { ascending: false })
       .limit(100);
+
+    if (region !== 'all') {
+      query = query.eq('region', region);
+    }
+
+    const { data, error } = await query;
 
     if (error) {
       return res.status(500).json({ error: error.message });

@@ -3,13 +3,18 @@ const API_URL = 'https://lolstats-production-a058.up.railway.app/api';
 const FALLBACK_ICON =
   'https://ddragon.leagueoflegends.com/cdn/14.10.1/img/profileicon/29.png';
 
+let allLeaderboardSummoners = [];
+
 async function loadLeaderboard() {
   try {
     const tierSelect = document.getElementById('leaderboard-tier');
+    const regionSelect = document.getElementById('leaderboard-region');
+
     const selectedTier = tierSelect ? tierSelect.value : 'Retador';
+    const selectedRegion = regionSelect ? regionSelect.value : 'all';
 
     const response = await fetch(
-      `${API_URL}/leaderboard?tier=${encodeURIComponent(selectedTier)}`
+      `${API_URL}/leaderboard?tier=${encodeURIComponent(selectedTier)}&region=${encodeURIComponent(selectedRegion)}`
     );
     const summoners = await response.json();
 
@@ -19,7 +24,9 @@ async function loadLeaderboard() {
       return;
     }
 
-    showLeaderboard(summoners);
+    allLeaderboardSummoners = summoners;
+    applyLeaderboardSearch();
+    setupLeaderboardSearch();
   } catch (error) {
     console.error(error);
     showLeaderboardError('Error cargando la leaderboard.');
@@ -96,6 +103,27 @@ function showLeaderboardError(message) {
       ${message}
     </p>
   `;
+}
+
+function setupLeaderboardSearch() {
+  const input = document.getElementById('leaderboard-search');
+
+  if (!input) return;
+
+  input.oninput = applyLeaderboardSearch;
+}
+
+function applyLeaderboardSearch() {
+  const input = document.getElementById('leaderboard-search');
+  const searchTerm = input ? input.value.trim().toLowerCase() : '';
+
+  const filteredSummoners = allLeaderboardSummoners.filter(summoner => {
+    const fullName = `${summoner.name || ''}${summoner.tag_line ? '#' + summoner.tag_line : ''}`.toLowerCase();
+
+    return fullName.includes(searchTerm);
+  });
+
+  showLeaderboard(filteredSummoners);
 }
 
 loadLeaderboard();
