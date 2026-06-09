@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Generar Torneo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="nav-item" onclick="window.location.href='search.html'">Invocadores</div>
+    <div class="nav-item" onclick="window.location.href='tierlist.html'">Tier list</div>
+    <div class="nav-item" onclick="window.location.href='champions.html'">Campeones</div>
+    <div class="nav-item" onclick="window.location.href='leaderboard.html'">LeaderBoards</div>
+    <div class="nav-item" onclick="window.location.href='dashboard.html'">Cuenta</div>
+    <div class="nav-item" onclick="window.location.href='tournament.html'">Generar torneo</div>
+  </div>
+
+  <main class="tournament-page">
+    <h1 class="tournament-title">Generar Torneo</h1>
+
+    <section id="step-size" class="tournament-panel">
+      <h2>Participantes</h2>
+
+      <select id="participant-count" class="tournament-select">
+        <option value="4">4 equipos</option>
+        <option value="8">8 equipos</option>
+        <option value="16">16 equipos</option>
+      </select>
+
+      <button class="tournament-button" onclick="showTeamForm()">
+        Confirmar
+      </button>
+    </section>
+
+    <section id="step-teams" class="tournament-panel hidden">
+      <h2>Equipos</h2>
+
+      <input
+        id="tournament-name"
+        class="tournament-input"
+        placeholder="Nombre del torneo"
+      >
+
+      <div id="teams-form" class="teams-form"></div>
+
+      <button class="tournament-button" onclick="confirmTeams()">
+        Confirmar equipos
+      </button>
+    </section>
+
+    <section id="step-mode" class="tournament-panel hidden">
+      <h2>Organizar enfrentamientos</h2>
+
+      <div class="tournament-actions">
+        <button class="tournament-button" onclick="generateRandomBracket()">
+          Aleatorio
+        </button>
+
+        <button class="tournament-button secondary" onclick="showManualOrganizer()">
+          Manual
+        </button>
+      </div>
+
+      <div id="manual-organizer" class="manual-organizer hidden"></div>
+    </section>
+
+    <section id="step-bracket" class="tournament-panel hidden">
+      <h2>Árbol del torneo</h2>
+
+      <div id="bracket" class="bracket"></div>
+    </section>
+
+    <section class="tournament-panel">
+      <h2>Mis torneos</h2>
+      <div id="saved-tournaments" class="saved-tournaments"></div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config/supabase.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/tournament.js"></script>
+
+</body>
+</html>
