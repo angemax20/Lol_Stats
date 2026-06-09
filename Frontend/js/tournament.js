@@ -200,6 +200,8 @@ function createBracket(firstRoundMatches) {
     matchId: `R1-M${index + 1}`,
     teamA: match.teamA,
     teamB: match.teamB,
+    sourceA: null,
+    sourceB: null,
     lockedA: false,
     lockedB: false
   })));
@@ -229,7 +231,7 @@ function createBracket(firstRoundMatches) {
 
   rounds.push([
     {
-      matchId: `WINNER`,
+      matchId: 'WINNER',
       teamA: '',
       teamB: '',
       sourceA: null,
@@ -268,10 +270,16 @@ function renderBracket(bracket) {
 }
 
 function getRoundName(index, totalRounds) {
-  if (index === totalRounds - 1) return 'Ganador';
-  if (index === totalRounds - 2) return 'Final';
-  if (index === totalRounds - 3) return 'Semifinal';
-  if (index === totalRounds - 4) return 'Cuartos';
+  const winnerIndex = totalRounds - 1;
+  const finalIndex = totalRounds - 2;
+  const semifinalIndex = totalRounds - 3;
+  const quarterIndex = totalRounds - 4;
+
+  if (index === winnerIndex) return 'Ganador';
+  if (index === finalIndex) return 'Final';
+  if (index === semifinalIndex) return 'Semifinal';
+  if (index === quarterIndex) return 'Cuartos';
+
   return `Ronda ${index + 1}`;
 }
 
