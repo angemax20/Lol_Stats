@@ -187,6 +187,8 @@ async function saveTournament(bracket) {
 
   const { data: userData, error: userError } = await supabase.auth.getUser();
 
+  console.log('Auth user id:', userData.user.id);
+
   if (userError || !userData.user) {
     alert('Debes iniciar sesión para guardar torneos.');
     return;
@@ -214,9 +216,9 @@ async function saveTournament(bracket) {
 async function loadSavedTournaments() {
   const container = document.getElementById('saved-tournaments');
 
-  const { data: userData } = await supabase.auth.getUser();
+  const { data: userData, error: userError } = await supabase.auth.getUser();
 
-  if (!userData.user) {
+  if (userError || !userData.user) {
     container.innerHTML = `
       <p class="tournament-empty">Inicia sesión para ver tus torneos.</p>
     `;
@@ -230,7 +232,10 @@ async function loadSavedTournaments() {
     .order('created_at', { ascending: false });
 
   if (error) {
-    console.error(error);
+    console.error('Error cargando torneos:', error);
+    container.innerHTML = `
+      <p class="tournament-empty">No se pudieron cargar tus torneos.</p>
+    `;
     return;
   }
 
