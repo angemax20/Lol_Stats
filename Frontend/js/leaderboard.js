@@ -27,11 +27,12 @@ async function loadLeaderboard() {
 }
 
 function showLeaderboard(summoners) {
-  const tierSelect = document.getElementById('leaderboard-tier');
-  const selectedTier = tierSelect ? tierSelect.value : 'Retador';
-
+  const list = document.getElementById('leaderboard-list');
 
   if (!summoners.length) {
+    const tierSelect = document.getElementById('leaderboard-tier');
+    const selectedTier = tierSelect ? tierSelect.value : 'Retador';
+
     list.innerHTML = `
       <p class="leaderboard-empty">
         No hay invocadores ${selectedTier} registrados.
