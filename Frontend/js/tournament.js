@@ -491,8 +491,14 @@ function advanceTeam(roundIndex, matchIndex, slot) {
   const team = slot === 'A' ? currentMatch.teamA : currentMatch.teamB;
 
   const nextRoundIndex = roundIndex + 1;
-  const nextMatchIndex = Math.floor(matchIndex / 2);
-  const nextSlot = matchIndex % 2 === 0 ? 'A' : 'B';
+  const nextMatchIndex = currentBracket[nextRoundIndex].length === 1
+    ? 0
+    : Math.floor(matchIndex / 2);
+
+  const nextSlot = currentBracket[nextRoundIndex][nextMatchIndex].matchId === 'WINNER'
+    ? 'A'
+    : matchIndex % 2 === 0 ? 'A' : 'B';
+
   const nextMatch = currentBracket[nextRoundIndex][nextMatchIndex];
 
   const nextTeamKey = nextSlot === 'A' ? 'teamA' : 'teamB';
