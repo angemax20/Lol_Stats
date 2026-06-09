@@ -2203,3 +2203,49 @@ body {
 
   font-weight: 800;
 }
+
+.leaderboard-controls {
+  width: min(1100px, 100%);
+
+  margin: 0 auto 22px;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.leaderboard-tier-select {
+  height: 44px;
+
+  padding: 0 16px;
+
+  background: #020403;
+
+  border: 1px solid rgba(141, 252, 63, 0.38);
+  border-radius: 12px;
+
+  color: #caff9a;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  outline: none;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0 18px rgba(141, 252, 63, 0.12);
+}
+
+.leaderboard-tier-select:hover,
+.leaderboard-tier-select:focus {
+  border-color: rgba(141, 252, 63, 0.75);
+
+  box-shadow:
+    0 0 0 3px rgba(141, 252, 63, 0.12),
+    0 0 22px rgba(141, 252, 63, 0.2);
+}
+
+.leaderboard-tier-select option {
+  background: #020403;
+  color: #caff9a;
+}

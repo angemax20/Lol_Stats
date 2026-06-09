@@ -5,6 +5,8 @@ const supabase = require('../config/supabase');
 
 router.get('/', async (req, res) => {
   try {
+    const { tier = 'Retador' } = req.query;
+
     const { data, error } = await supabase
       .from('summoners')
       .select(`
@@ -19,7 +21,7 @@ router.get('/', async (req, res) => {
         soloq_wins,
         soloq_losses
       `)
-      .eq('soloq_tier', 'Retador')
+      .eq('soloq_tier', tier)
       .order('soloq_lp', { ascending: false })
       .limit(100);
 

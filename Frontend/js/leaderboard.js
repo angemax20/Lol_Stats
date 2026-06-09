@@ -5,7 +5,12 @@ const FALLBACK_ICON =
 
 async function loadLeaderboard() {
   try {
-    const response = await fetch(`${API_URL}/leaderboard`);
+    const tierSelect = document.getElementById('leaderboard-tier');
+    const selectedTier = tierSelect ? tierSelect.value : 'Retador';
+
+    const response = await fetch(
+      `${API_URL}/leaderboard?tier=${encodeURIComponent(selectedTier)}`
+    );
     const summoners = await response.json();
 
     if (!response.ok) {
@@ -22,12 +27,14 @@ async function loadLeaderboard() {
 }
 
 function showLeaderboard(summoners) {
-  const list = document.getElementById('leaderboard-list');
+  const tierSelect = document.getElementById('leaderboard-tier');
+  const selectedTier = tierSelect ? tierSelect.value : 'Retador';
+
 
   if (!summoners.length) {
     list.innerHTML = `
       <p class="leaderboard-empty">
-        No hay invocadores Retador registrados.
+        No hay invocadores ${selectedTier} registrados.
       </p>
     `;
     return;

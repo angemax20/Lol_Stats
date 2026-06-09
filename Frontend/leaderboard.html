@@ -36,6 +36,14 @@
   <main class="leaderboard-page">
     <h1 class="leaderboard-title">Leaderboard</h1>
 
+    <div class="leaderboard-controls">
+      <select id="leaderboard-tier" class="leaderboard-tier-select" onchange="loadLeaderboard()">
+        <option value="Retador">Retador</option>
+        <option value="Gran Maestro">Gran Maestro</option>
+        <option value="Maestro">Maestro</option>
+      </select>
+    </div>
+
     <section class="leaderboard-panel">
       <div class="leaderboard-header">
         <span>#</span>
