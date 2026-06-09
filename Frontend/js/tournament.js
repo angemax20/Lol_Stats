@@ -60,10 +60,10 @@ function closeBracket() {
   openedSavedTournamentId = null;
 
   const bracket = document.getElementById('bracket');
-  const bracketStep = document.getElementById('step-bracket');
 
   if (bracket) bracket.innerHTML = '';
-  if (bracketStep) bracketStep.classList.add('hidden');
+
+  showOnlyStep('step-size');
 }
 
 function showTeamForm() {
@@ -343,16 +343,22 @@ async function loadSavedTournaments() {
 function cancelTournamentCreation() {
   tournamentTeams = [];
   currentBracket = null;
+  openedSavedTournamentId = null;
 
-  document.getElementById('tournament-name').value = '';
-  document.getElementById('teams-form').innerHTML = '';
-  document.getElementById('manual-organizer').innerHTML = '';
-  document.getElementById('bracket').innerHTML = '';
+  const tournamentName = document.getElementById('tournament-name');
+  const teamsForm = document.getElementById('teams-form');
+  const manualOrganizer = document.getElementById('manual-organizer');
+  const bracket = document.getElementById('bracket');
 
-  document.getElementById('step-teams').classList.add('hidden');
-  document.getElementById('step-mode').classList.add('hidden');
-  document.getElementById('manual-organizer').classList.add('hidden');
-  document.getElementById('step-bracket').classList.add('hidden');
+  if (tournamentName) tournamentName.value = '';
+  if (teamsForm) teamsForm.innerHTML = '';
+  if (manualOrganizer) {
+    manualOrganizer.innerHTML = '';
+    manualOrganizer.classList.add('hidden');
+  }
+  if (bracket) bracket.innerHTML = '';
+
+  showOnlyStep('step-size');
 }
 
 async function deleteTournament(tournamentId) {
