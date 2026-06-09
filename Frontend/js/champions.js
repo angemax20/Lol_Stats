@@ -1,4 +1,5 @@
 const API_URL = 'https://lolstats-production-a058.up.railway.app/api';
+let allChampions = [];
 
 const FALLBACK_ICON =
   'https://ddragon.leagueoflegends.com/cdn/14.10.1/img/profileicon/29.png';
@@ -13,10 +14,28 @@ async function loadChampions() {
       return;
     }
 
-    showChampions(champions);
+    allChampions = champions;
+    showChampions(allChampions);
+    setupChampionSearch();
   } catch (error) {
     console.error('Error cargando campeones:', error);
   }
+}
+
+function setupChampionSearch() {
+  const input = document.getElementById('champion-search');
+
+  if (!input) return;
+
+  input.addEventListener('input', () => {
+    const searchTerm = input.value.trim().toLowerCase();
+
+    const filteredChampions = allChampions.filter(champion => {
+      return champion.champion_name.toLowerCase().includes(searchTerm);
+    });
+
+    showChampions(filteredChampions);
+  });
 }
 
 function showChampions(champions) {
