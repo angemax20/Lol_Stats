@@ -1,5 +1,70 @@
 let tournamentTeams = [];
 let currentBracket = null;
+let openedSavedTournamentId = null;
+
+function showOnlyStep(stepId) {
+  const steps = [
+    'step-size',
+    'step-teams',
+    'step-mode',
+    'step-bracket'
+  ];
+
+  steps.forEach(id => {
+    const element = document.getElementById(id);
+
+    if (!element) return;
+
+    if (id === stepId) {
+      element.classList.remove('hidden');
+    } else {
+      element.classList.add('hidden');
+    }
+  });
+}
+
+function goBackToSize() {
+  tournamentTeams = [];
+  currentBracket = null;
+  openedSavedTournamentId = null;
+
+  document.getElementById('teams-form').innerHTML = '';
+  document.getElementById('manual-organizer').innerHTML = '';
+  document.getElementById('bracket').innerHTML = '';
+
+  showOnlyStep('step-size');
+}
+
+function goBackToTeams() {
+  currentBracket = null;
+  openedSavedTournamentId = null;
+
+  document.getElementById('manual-organizer').innerHTML = '';
+  document.getElementById('manual-organizer').classList.add('hidden');
+  document.getElementById('bracket').innerHTML = '';
+
+  showOnlyStep('step-teams');
+}
+
+function goBackToMode() {
+  currentBracket = null;
+  openedSavedTournamentId = null;
+
+  document.getElementById('bracket').innerHTML = '';
+
+  showOnlyStep('step-mode');
+}
+
+function closeBracket() {
+  currentBracket = null;
+  openedSavedTournamentId = null;
+
+  const bracket = document.getElementById('bracket');
+  const bracketStep = document.getElementById('step-bracket');
+
+  if (bracket) bracket.innerHTML = '';
+  if (bracketStep) bracketStep.classList.add('hidden');
+}
 
 function showTeamForm() {
   const count = Number(document.getElementById('participant-count').value);
@@ -17,7 +82,7 @@ function showTeamForm() {
     `;
   }
 
-  document.getElementById('step-teams').classList.remove('hidden');
+  showOnlyStep('step-teams');
 }
 
 function confirmTeams() {
@@ -38,7 +103,7 @@ function confirmTeams() {
 
   tournamentTeams = teams;
 
-  document.getElementById('step-mode').classList.remove('hidden');
+  showOnlyStep('step-mode');
 }
 
 function shuffle(array) {
@@ -162,7 +227,7 @@ function createBracket(firstRoundMatches) {
 }
 
 function renderBracket(bracket) {
-  const bracketContainer = document.getElementById('bracket');
+  showOnlyStep('step-bracket');
 
   document.getElementById('step-bracket').classList.remove('hidden');
 
@@ -259,7 +324,7 @@ async function loadSavedTournaments() {
   <div class="saved-tournament">
     <button
       class="saved-tournament-open"
-      onclick='renderBracket(${JSON.stringify(tournament.bracket)})'
+      onclick='toggleSavedTournament("${tournament.id}", ${JSON.stringify(tournament.bracket)})'
     >
       <strong>${tournament.name}</strong>
       <span>${tournament.participant_count} equipos</span>
@@ -322,8 +387,18 @@ async function deleteTournament(tournamentId) {
     alert(data.error || 'No se pudo eliminar el torneo.');
     return;
   }
-
+  closeBracket();
   loadSavedTournaments();
+}
+
+function toggleSavedTournament(tournamentId, bracket) {
+  if (openedSavedTournamentId === tournamentId) {
+    closeBracket();
+    return;
+  }
+
+  openedSavedTournamentId = tournamentId;
+  renderBracket(bracket);
 }
 
 loadSavedTournaments();

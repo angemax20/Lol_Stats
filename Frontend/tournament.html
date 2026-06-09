@@ -49,6 +49,10 @@
           Confirmar equipos
         </button>
 
+        <button class="tournament-button" onclick="goBackToSize()">
+          Volver
+        </button>
+
         <button class="tournament-button" onclick="cancelTournamentCreation()">
           Cancelar
         </button>
@@ -67,6 +71,10 @@
           Manual
         </button>
 
+        <button class="tournament-button" onclick="goBackToTeams()">
+          Volver
+        </button>
+
         <button class="tournament-button" onclick="cancelTournamentCreation()">
           Cancelar
         </button>
@@ -79,6 +87,14 @@
       <h2>Árbol del torneo</h2>
 
       <div id="bracket" class="bracket"></div>
+
+      <div class="tournament-actions">
+
+      <button class="tournament-button" onclick="closeBracket()">
+        Cerrar árbol
+      </button>
+      
+      </div>
     </section>
 
     <section class="tournament-panel">
