@@ -55,4 +55,25 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.delete('/:tournamentId', async (req, res) => {
+  const { tournamentId } = req.params;
+  const { user_id } = req.body;
+
+  try {
+    const { error } = await supabase
+      .from('tournaments')
+      .delete()
+      .eq('id', tournamentId)
+      .eq('user_id', user_id);
+
+    if (error) {
+      return res.status(500).json({ error: error.message });
+    }
+
+    res.json({ message: 'Torneo eliminado correctamente' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error eliminando torneo' });
+  }
+});
+
 module.exports = router;

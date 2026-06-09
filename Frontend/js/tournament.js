@@ -79,10 +79,16 @@ function showManualOrganizer() {
   }
 
   container.innerHTML += `
+  <div class="tournament-actions">
     <button class="tournament-button" onclick="confirmManualBracket()">
       Confirmar enfrentamientos
     </button>
-  `;
+
+    <button class="tournament-button" onclick="cancelTournamentCreation()">
+      Cancelar
+    </button>
+  </div>
+`;
 }
 
 function confirmManualBracket() {
@@ -250,14 +256,74 @@ async function loadSavedTournaments() {
   }
 
   container.innerHTML = data.map(tournament => `
+  <div class="saved-tournament">
     <button
-      class="saved-tournament"
+      class="saved-tournament-open"
       onclick='renderBracket(${JSON.stringify(tournament.bracket)})'
     >
       <strong>${tournament.name}</strong>
       <span>${tournament.participant_count} equipos</span>
     </button>
-  `).join('');
+
+    <button
+      class="tournament-delete-button"
+      onclick="deleteTournament('${tournament.id}')"
+    >
+      Eliminar
+    </button>
+  </div>
+`).join('');
+}
+
+function cancelTournamentCreation() {
+  tournamentTeams = [];
+  currentBracket = null;
+
+  document.getElementById('tournament-name').value = '';
+  document.getElementById('teams-form').innerHTML = '';
+  document.getElementById('manual-organizer').innerHTML = '';
+  document.getElementById('bracket').innerHTML = '';
+
+  document.getElementById('step-teams').classList.add('hidden');
+  document.getElementById('step-mode').classList.add('hidden');
+  document.getElementById('manual-organizer').classList.add('hidden');
+  document.getElementById('step-bracket').classList.add('hidden');
+}
+
+async function deleteTournament(tournamentId) {
+  const userId = localStorage.getItem('user_id');
+
+  if (!userId) {
+    alert('Debes iniciar sesión para eliminar torneos.');
+    return;
+  }
+
+  const confirmed = confirm('¿Seguro que quieres eliminar este torneo?');
+
+  if (!confirmed) return;
+
+  const response = await fetch(
+    `https://lolstats-production-a058.up.railway.app/api/tournaments/${tournamentId}`,
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id: userId
+      })
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    console.error(data);
+    alert(data.error || 'No se pudo eliminar el torneo.');
+    return;
+  }
+
+  loadSavedTournaments();
 }
 
 loadSavedTournaments();

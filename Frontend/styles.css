@@ -2352,28 +2352,50 @@ body {
   outline: none;
 }
 
-.tournament-button {
+.tournament-button,
+.tournament-delete-button {
   height: 46px;
 
   padding: 0 18px;
-  margin-left: 10px;
 
-  background:
-    linear-gradient(
-      180deg,
-      #8dfc3f 0%,
-      #48b91f 100%
-    );
+  background: #020403;
 
-  border: none;
+  border: 1px solid rgba(141, 252, 63, 0.42);
   border-radius: 12px;
 
-  color: #061006;
+  color: #caff9a;
 
   font-size: 14px;
   font-weight: 900;
 
   cursor: pointer;
+
+  box-shadow:
+    0 0 14px rgba(141, 252, 63, 0.08);
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.tournament-button:hover,
+.tournament-delete-button:hover {
+  transform: translateY(-2px);
+
+  background: #050b07;
+
+  border-color: rgba(141, 252, 63, 0.82);
+
+  box-shadow:
+    0 0 0 3px rgba(141, 252, 63, 0.12),
+    0 0 24px rgba(141, 252, 63, 0.26);
+}
+
+.tournament-button:active,
+.tournament-delete-button:active {
+  transform: translateY(0);
 }
 
 .tournament-button.secondary {
@@ -2471,24 +2493,59 @@ body {
 }
 
 .saved-tournament {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
   align-items: center;
 
-  padding: 14px 16px;
+  padding: 12px;
 
   background: #020403;
 
   border: 1px solid rgba(141, 252, 63, 0.28);
   border-radius: 12px;
+}
+
+.saved-tournament-open {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+
+  padding: 12px 14px;
+
+  background: transparent;
+
+  border: none;
 
   color: #caff9a;
 
   cursor: pointer;
+
+  text-align: left;
 }
 
-.saved-tournament span {
+.saved-tournament-open strong {
+  color: #f8fff4;
+}
+
+.saved-tournament-open span {
   color: #9fb69d;
+}
+
+.tournament-delete-button {
+  color: #ffb4b4;
+
+  border-color: rgba(255, 77, 77, 0.4);
+}
+
+.tournament-delete-button:hover {
+  border-color: rgba(255, 77, 77, 0.78);
+
+  box-shadow:
+    0 0 0 3px rgba(255, 77, 77, 0.1),
+    0 0 24px rgba(255, 77, 77, 0.22);
 }
 
 .tournament-empty {
