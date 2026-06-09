@@ -2576,3 +2576,41 @@ body {
     margin-top: 10px;
   }
 }
+
+.bracket-team {
+  width: 100%;
+
+  padding: 8px 10px;
+
+  background: rgba(141, 252, 63, 0.08);
+
+  border: 1px solid rgba(141, 252, 63, 0.22);
+  border-radius: 8px;
+
+  color: #f8fff4;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.bracket-team:hover {
+  border-color: rgba(141, 252, 63, 0.75);
+
+  box-shadow:
+    0 0 18px rgba(141, 252, 63, 0.2);
+}
+
+.bracket-team.locked {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+
+  border-color: rgba(141, 252, 63, 0.12);
+}
+
+.bracket-team:disabled {
+  opacity: 0.35;
+
+  cursor: not-allowed;
+}

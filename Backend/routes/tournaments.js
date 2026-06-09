@@ -76,4 +76,27 @@ router.delete('/:tournamentId', async (req, res) => {
   }
 });
 
+router.put('/:tournamentId', async (req, res) => {
+  const { tournamentId } = req.params;
+  const { user_id, bracket } = req.body;
+
+  try {
+    const { data, error } = await supabase
+      .from('tournaments')
+      .update({ bracket })
+      .eq('id', tournamentId)
+      .eq('user_id', user_id)
+      .select()
+      .single();
+
+    if (error) {
+      return res.status(500).json({ error: error.message });
+    }
+
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: 'Error actualizando torneo' });
+  }
+});
+
 module.exports = router;
