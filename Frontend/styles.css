@@ -2029,3 +2029,170 @@ body {
   box-shadow:
     0 0 12px rgba(141, 252, 63, 0.45);
 }
+
+/* // LEADERBOARD */
+
+.leaderboard-page {
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 150px 40px 60px;
+
+  background: #020403;
+
+  color: white;
+}
+
+.leaderboard-title {
+  margin: 0 0 38px;
+
+  text-align: center;
+
+  font-size: 44px;
+
+  color: #8dfc3f;
+
+  text-shadow:
+    0 0 12px rgba(141, 252, 63, 0.65),
+    0 0 28px rgba(141, 252, 63, 0.35);
+}
+
+.leaderboard-panel {
+  width: min(1100px, 100%);
+
+  margin: 0 auto;
+
+  background:
+    linear-gradient(
+      180deg,
+      #102015 0%,
+      #07110a 100%
+    );
+
+  border: 1px solid rgba(141, 252, 63, 0.26);
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.45),
+    0 0 24px rgba(141, 252, 63, 0.12);
+}
+
+.leaderboard-header,
+.leaderboard-row {
+  display: grid;
+  grid-template-columns: 70px 1fr 120px 120px 120px;
+  align-items: center;
+  gap: 14px;
+}
+
+.leaderboard-header {
+  padding: 16px 20px;
+
+  background: rgba(2, 4, 3, 0.85);
+
+  color: #8dfc3f;
+
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.leaderboard-row {
+  padding: 16px 20px;
+
+  border-top: 1px solid rgba(141, 252, 63, 0.12);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.leaderboard-row:hover {
+  background: rgba(141, 252, 63, 0.07);
+}
+
+.leaderboard-rank {
+  color: #8dfc3f;
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.leaderboard-summoner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.leaderboard-summoner img {
+  width: 46px;
+  height: 46px;
+
+  border-radius: 12px;
+
+  border: 2px solid rgba(141, 252, 63, 0.42);
+}
+
+.leaderboard-summoner strong {
+  display: block;
+
+  color: #f8fff4;
+
+  font-size: 15px;
+}
+
+.leaderboard-summoner span {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #9fb69d;
+
+  font-size: 12px;
+}
+
+.leaderboard-region,
+.leaderboard-lp,
+.leaderboard-winrate {
+  color: #caff9a;
+
+  font-weight: 800;
+}
+
+.leaderboard-empty {
+  padding: 34px;
+
+  color: #ffb4b4;
+
+  text-align: center;
+  font-weight: 800;
+}
+
+@media(max-width: 768px) {
+  .leaderboard-page {
+    padding: 130px 18px 40px;
+  }
+
+  .leaderboard-title {
+    font-size: 34px;
+  }
+
+  .leaderboard-header {
+    display: none;
+  }
+
+  .leaderboard-row {
+    grid-template-columns: 44px 1fr;
+    gap: 12px;
+  }
+
+  .leaderboard-region,
+  .leaderboard-lp,
+  .leaderboard-winrate {
+    grid-column: 2;
+
+    font-size: 13px;
+  }
+}
