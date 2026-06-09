@@ -2082,7 +2082,7 @@ body {
 .leaderboard-header,
 .leaderboard-row {
   display: grid;
-  grid-template-columns: 70px 1fr 120px 120px 120px;
+  grid-template-columns: 70px minmax(260px, 1fr) 110px 150px 110px 120px;
   align-items: center;
   gap: 14px;
 }
@@ -2189,10 +2189,17 @@ body {
   }
 
   .leaderboard-region,
+  .leaderboard-rank-label,
   .leaderboard-lp,
   .leaderboard-winrate {
     grid-column: 2;
 
     font-size: 13px;
   }
+}
+
+.leaderboard-rank-label {
+  color: #caff9a;
+
+  font-weight: 800;
 }

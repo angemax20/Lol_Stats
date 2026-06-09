@@ -64,6 +64,10 @@ function showLeaderboard(summoners) {
           ${summoner.region || 'N/A'}
         </div>
 
+        <div class="leaderboard-rank-label">
+          ${summoner.soloq_tier || 'Sin rango'} ${summoner.soloq_rank || ''}
+        </div>
+
         <div class="leaderboard-lp">
           ${summoner.soloq_lp || 0} LP
         </div>
