@@ -27,7 +27,7 @@ function showLeaderboard(summoners) {
   if (!summoners.length) {
     list.innerHTML = `
       <p class="leaderboard-empty">
-        No hay invocadores Challenger registrados.
+        No hay invocadores Retador registrados.
       </p>
     `;
     return;

@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
         soloq_wins,
         soloq_losses
       `)
-      .eq('soloq_tier', 'CHALLENGER')
+      .eq('soloq_tier', 'Retador')
       .order('soloq_lp', { ascending: false })
       .limit(100);
 
