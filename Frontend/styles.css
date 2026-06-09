@@ -1937,8 +1937,9 @@ body {
 
     text-align: center;
   }
+}
 
-  .champions-search-panel {
+.champions-search-panel {
   width: min(620px, 100%);
 
   margin: 0 auto 38px;
@@ -2027,5 +2028,4 @@ body {
 
   box-shadow:
     0 0 12px rgba(141, 252, 63, 0.45);
-}
 }
