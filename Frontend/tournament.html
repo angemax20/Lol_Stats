@@ -95,6 +95,45 @@
     </section>
   </main>
 
+  <div id="team-action-modal" class="tournament-modal hidden">
+    <div class="tournament-modal-content">
+      <h3 id="team-action-title">Equipo</h3>
+
+      <div class="tournament-actions">
+        <button id="team-advance-button" class="tournament-button">
+          Pasar
+        </button>
+
+        <button id="team-return-button" class="tournament-button">
+          Devolver
+        </button>
+
+        <button class="tournament-button" onclick="closeTeamActionModal()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="delete-confirm-modal" class="tournament-modal hidden">
+    <div class="tournament-modal-content">
+      <h3>Eliminar torneo</h3>
+      <p>¿Seguro que quieres eliminar este torneo?</p>
+
+      <div class="tournament-actions">
+        <button id="confirm-delete-button" class="tournament-button danger">
+          Eliminar
+        </button>
+
+        <button class="tournament-button" onclick="closeDeleteConfirmModal()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tournament-toast" class="tournament-toast"></div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config/supabase.js"></script>
   <script src="js/auth.js"></script>

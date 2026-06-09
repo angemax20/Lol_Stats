@@ -1,6 +1,8 @@
 let tournamentTeams = [];
 let currentBracket = null;
 let openedSavedTournamentId = null;
+let selectedTeamAction = null;
+let pendingDeleteTournamentId = null;
 
 function showOnlyStep(stepId) {
   const steps = [
@@ -316,6 +318,8 @@ async function saveTournament(bracket) {
     return;
   }
 
+  openedSavedTournamentId = data.id
+
   loadSavedTournaments();
 }
 
@@ -392,17 +396,36 @@ function cancelTournamentCreation() {
   showOnlyStep('step-size');
 }
 
-async function deleteTournament(tournamentId) {
+function deleteTournament(tournamentId) {
+  pendingDeleteTournamentId = tournamentId;
+
+  const modal = document.getElementById('delete-confirm-modal');
+  const button = document.getElementById('confirm-delete-button');
+
+  button.onclick = confirmDeleteTournament;
+
+  modal.classList.remove('hidden');
+}
+
+function closeDeleteConfirmModal() {
+  pendingDeleteTournamentId = null;
+
+  const modal = document.getElementById('delete-confirm-modal');
+
+  if (modal) {
+    modal.classList.add('hidden');
+  }
+}
+
+async function confirmDeleteTournament() {
   const userId = localStorage.getItem('user_id');
 
-  if (!userId) {
-    alert('Debes iniciar sesión para eliminar torneos.');
+  if (!userId || !pendingDeleteTournamentId) {
+    showTournamentToast('Debes iniciar sesión para eliminar torneos.', 'error');
     return;
   }
 
-  const confirmed = confirm('¿Seguro que quieres eliminar este torneo?');
-
-  if (!confirmed) return;
+  const tournamentId = pendingDeleteTournamentId;
 
   const response = await fetch(
     `https://lolstats-production-a058.up.railway.app/api/tournaments/${tournamentId}`,
@@ -419,13 +442,41 @@ async function deleteTournament(tournamentId) {
 
   const data = await response.json();
 
+  closeDeleteConfirmModal();
+
   if (!response.ok) {
     console.error(data);
-    alert(data.error || 'No se pudo eliminar el torneo.');
+    showTournamentToast(data.error || 'No se pudo eliminar el torneo.', 'error');
     return;
   }
-  closeBracket();
+
+  if (openedSavedTournamentId === tournamentId) {
+    closeBracket();
+  }
+
+  showTournamentToast('Torneo eliminado correctamente.');
   loadSavedTournaments();
+}
+
+function showTournamentToast(message, type = 'success') {
+  const toast = document.getElementById('tournament-toast');
+
+  if (!toast) return;
+
+  toast.textContent = message;
+  toast.classList.remove('visible', 'error');
+
+  if (type === 'error') {
+    toast.classList.add('error');
+  }
+
+  requestAnimationFrame(() => {
+    toast.classList.add('visible');
+  });
+
+  setTimeout(() => {
+    toast.classList.remove('visible');
+  }, 2400);
 }
 
 function toggleSavedTournament(tournamentId, bracket) {
@@ -460,29 +511,45 @@ function openTeamActions(roundIndex, matchIndex, slot) {
 
   if (!team || locked) return;
 
+  selectedTeamAction = {
+    roundIndex,
+    matchIndex,
+    slot
+  };
+
+  const modal = document.getElementById('team-action-modal');
+  const title = document.getElementById('team-action-title');
+  const advanceButton = document.getElementById('team-advance-button');
+  const returnButton = document.getElementById('team-return-button');
+
   const canAdvance = roundIndex < currentBracket.length - 1;
   const canReturn = roundIndex > 0;
 
-  const actions = [];
+  title.textContent = team;
 
-  if (canAdvance) {
-    actions.push('1. Pasar');
-  }
+  advanceButton.style.display = canAdvance ? 'inline-flex' : 'none';
+  returnButton.style.display = canReturn ? 'inline-flex' : 'none';
 
-  if (canReturn) {
-    actions.push('2. Devolver');
-  }
-
-  const choice = prompt(
-    `${team}\n\n${actions.join('\n')}\n\nEscribe 1 o 2`
-  );
-
-  if (choice === '1' && canAdvance) {
+  advanceButton.onclick = () => {
     advanceTeam(roundIndex, matchIndex, slot);
-  }
+    closeTeamActionModal();
+  };
 
-  if (choice === '2' && canReturn) {
+  returnButton.onclick = () => {
     returnTeam(roundIndex, matchIndex, slot);
+    closeTeamActionModal();
+  };
+
+  modal.classList.remove('hidden');
+}
+
+function closeTeamActionModal() {
+  selectedTeamAction = null;
+
+  const modal = document.getElementById('team-action-modal');
+
+  if (modal) {
+    modal.classList.add('hidden');
   }
 }
 
