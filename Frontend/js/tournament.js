@@ -185,28 +185,32 @@ async function saveTournament(bracket) {
   const nameInput = document.getElementById('tournament-name');
   const tournamentName = nameInput.value.trim() || 'Torneo sin nombre';
 
-  const { data: userData, error: userError } = await supabase.auth.getUser();
+  const userId = localStorage.getItem('user_id');
 
-  console.log('Auth user id:', userData.user.id);
-
-  if (userError || !userData.user) {
+  if (!userId) {
     alert('Debes iniciar sesión para guardar torneos.');
     return;
   }
 
-  const { error } = await supabase
-    .from('tournaments')
-    .insert({
-      user_id: userData.user.id,
+  const response = await fetch('https://lolstats-production-a058.up.railway.app/api/tournaments', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      user_id: userId,
       name: tournamentName,
       participant_count: tournamentTeams.length,
       teams: tournamentTeams,
       bracket
-    });
+    })
+  });
 
-  if (error) {
-    console.error(error);
-    alert('No se pudo guardar el torneo.');
+  const data = await response.json();
+
+  if (!response.ok) {
+    console.error(data);
+    alert(data.error || 'No se pudo guardar el torneo.');
     return;
   }
 
@@ -215,24 +219,23 @@ async function saveTournament(bracket) {
 
 async function loadSavedTournaments() {
   const container = document.getElementById('saved-tournaments');
+  const userId = localStorage.getItem('user_id');
 
-  const { data: userData, error: userError } = await supabase.auth.getUser();
-
-  if (userError || !userData.user) {
+  if (!userId) {
     container.innerHTML = `
       <p class="tournament-empty">Inicia sesión para ver tus torneos.</p>
     `;
     return;
   }
 
-  const { data, error } = await supabase
-    .from('tournaments')
-    .select('*')
-    .eq('user_id', userData.user.id)
-    .order('created_at', { ascending: false });
+  const response = await fetch(
+    `https://lolstats-production-a058.up.railway.app/api/tournaments/${userId}`
+  );
 
-  if (error) {
-    console.error('Error cargando torneos:', error);
+  const data = await response.json();
+
+  if (!response.ok) {
+    console.error(data);
     container.innerHTML = `
       <p class="tournament-empty">No se pudieron cargar tus torneos.</p>
     `;
