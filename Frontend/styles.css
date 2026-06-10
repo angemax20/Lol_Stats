@@ -2966,3 +2966,11 @@ body {
     0 0 0 3px rgba(141, 252, 63, 0.12),
     0 0 24px rgba(141, 252, 63, 0.26);
 }
+
+.match-item-meta span:first-child {
+  color: #8dfc3f;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+}

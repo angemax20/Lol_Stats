@@ -246,6 +246,7 @@ function showSummoner(summoner) {
             </div>
 
             <div class="match-item-meta">
+              <span>${match.game_mode || 'CLASSIC'}</span>
               <span>${match.game_duration}'</span>
               <span>${match.lane || match.role || ''}</span>
             </div>
