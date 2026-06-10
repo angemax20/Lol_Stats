@@ -51,6 +51,11 @@ async function loadFavorites() {
 
     return `
       <article class="favorite-card">
+      <button
+        class="favorite-card-main"
+        onclick="openFavoriteSummoner('${encodeURIComponent(summoner.name)}', '${encodeURIComponent(summoner.region)}')"
+      >
+
         <img
           src="https://ddragon.leagueoflegends.com/cdn/14.10.1/img/profileicon/${summoner.profile_icon_id || 29}.png"
           alt="${summoner.name}"
@@ -92,6 +97,10 @@ async function removeFavorite(summonerId) {
   }
 
   loadFavorites();
+}
+
+function openFavoriteSummoner(name, region) {
+  window.location.href = `search.html?summoner=${name}&region=${region}`;
 }
 
 loadFavorites();
