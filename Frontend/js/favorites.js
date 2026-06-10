@@ -15,7 +15,21 @@ async function loadFavorites() {
   }
 
   const response = await fetch(`${API_URL}/favorites/${userId}`);
-  const data = await response.json();
+  const text = await response.text();
+
+    let data;
+
+    try {
+    data = JSON.parse(text);
+    } catch {
+    console.error('Respuesta no JSON:', text);
+    container.innerHTML = `
+        <p class="favorites-empty">
+            No se pudo conectar con la ruta de favoritos.
+        </p>
+        `;
+    return;
+    }
 
   if (!response.ok) {
     console.error(data);

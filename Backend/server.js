@@ -10,6 +10,7 @@ const tierlistRoutes = require('./routes/tierlist');
 const championsRoutes = require('./routes/champions');
 const leaderboardRoutes = require('./routes/leaderboard');
 const tournamentsRoutes = require('./routes/tournaments');
+const favoritesRoutes = require('./routes/favorites');
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use('/api/tierlist', tierlistRoutes);
 app.use('/api/champions', championsRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
 app.use('/api/tournaments', tournamentsRoutes);
+app.use('/api/favorites', favoritesRoutes);
 
 app.get('/', (req, res) => {
   res.send('Backend funcionando');

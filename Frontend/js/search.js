@@ -1,3 +1,5 @@
+const API_URL = 'https://lolstats-production-a058.up.railway.app/api';
+
 const FALLBACK_ICON =
   'https://ddragon.leagueoflegends.com/cdn/14.10.1/img/profileicon/29.png';
 
