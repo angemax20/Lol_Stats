@@ -121,18 +121,20 @@ function showManualOrganizer() {
   container.classList.remove('hidden');
   container.innerHTML = '';
 
-  const count = tournamentTeams.length / 2;
+  const count = Math.ceil(tournamentTeams.length / 2);
 
   for (let i = 0; i < count; i++) {
     container.innerHTML += `
       <div class="manual-match">
         <select class="manual-team">
+          <option value="">Sin rival</option>
           ${tournamentTeams.map(team => `<option value="${team}">${team}</option>`).join('')}
         </select>
 
         <span>vs</span>
 
         <select class="manual-team">
+          <option value="">Sin rival</option>
           ${tournamentTeams.map(team => `<option value="${team}">${team}</option>`).join('')}
         </select>
       </div>
@@ -154,20 +156,29 @@ function showManualOrganizer() {
 
 function confirmManualBracket() {
   const selects = [...document.querySelectorAll('.manual-team')];
-  const selectedTeams = selects.map(select => select.value);
+  const selectedTeams = selects
+    .map(select => select.value)
+    .filter(value => value !== '');
+
   const uniqueTeams = new Set(selectedTeams);
 
-  if (uniqueTeams.size !== tournamentTeams.length) {
+  if (uniqueTeams.size !== selectedTeams.length) {
     alert('No puedes repetir equipos. Todos deben aparecer una sola vez.');
     return;
   }
 
+  if (uniqueTeams.size !== tournamentTeams.length) {
+    alert('Debes usar todos los equipos una sola vez.');
+    return;
+  }
+
+  const rawTeams = selects.map(select => select.value);
   const matches = [];
 
-  for (let i = 0; i < selectedTeams.length; i += 2) {
+  for (let i = 0; i < rawTeams.length; i += 2) {
     matches.push({
-      teamA: selectedTeams[i],
-      teamB: selectedTeams[i + 1]
+      teamA: rawTeams[i],
+      teamB: rawTeams[i + 1] || ''
     });
   }
 
@@ -182,7 +193,7 @@ function createFirstRound(teams) {
   for (let i = 0; i < teams.length; i += 2) {
     matches.push({
       teamA: teams[i],
-      teamB: teams[i + 1]
+      teamB: teams[i + 1] || ''
     });
   }
 
@@ -195,7 +206,7 @@ function createBracket(firstRoundMatches) {
   rounds.push(firstRoundMatches.map((match, index) => ({
     matchId: `R1-M${index + 1}`,
     teamA: match.teamA,
-    teamB: match.teamB,
+    teamB: match.teamB || '',
     sourceA: null,
     sourceB: null,
     lockedA: false,
@@ -206,9 +217,10 @@ function createBracket(firstRoundMatches) {
   let roundNumber = 2;
 
   while (previousRoundSize > 1) {
+    const nextRoundSize = Math.ceil(previousRoundSize / 2);
     const round = [];
 
-    for (let i = 0; i < previousRoundSize / 2; i++) {
+    for (let i = 0; i < nextRoundSize; i++) {
       round.push({
         matchId: `R${roundNumber}-M${i + 1}`,
         teamA: '',
@@ -221,7 +233,7 @@ function createBracket(firstRoundMatches) {
     }
 
     rounds.push(round);
-    previousRoundSize = round.length;
+    previousRoundSize = nextRoundSize;
     roundNumber++;
   }
 
@@ -562,15 +574,12 @@ function advanceTeam(roundIndex, matchIndex, slot) {
   const team = slot === 'A' ? currentMatch.teamA : currentMatch.teamB;
 
   const nextRoundIndex = roundIndex + 1;
-  const nextMatchIndex = currentBracket[nextRoundIndex].length === 1
-    ? 0
-    : Math.floor(matchIndex / 2);
+  const nextMatchIndex = Math.floor(matchIndex / 2);
+  const nextMatch = currentBracket[nextRoundIndex][nextMatchIndex];
 
-  const nextSlot = currentBracket[nextRoundIndex][nextMatchIndex].matchId === 'WINNER'
+  const nextSlot = nextMatch.matchId === 'WINNER'
     ? 'A'
     : matchIndex % 2 === 0 ? 'A' : 'B';
-
-  const nextMatch = currentBracket[nextRoundIndex][nextMatchIndex];
 
   const nextTeamKey = nextSlot === 'A' ? 'teamA' : 'teamB';
   const nextSourceKey = nextSlot === 'A' ? 'sourceA' : 'sourceB';
