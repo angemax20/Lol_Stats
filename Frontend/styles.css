@@ -2573,7 +2573,7 @@ body {
 
   .tournament-button {
     margin-left: 0;
-    margin-top: 0px;
+    margin-top: 10px;
   }
 }
 
@@ -2743,4 +2743,33 @@ body {
   box-shadow:
     0 0 24px rgba(255, 77, 77, 0.18),
     0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.tournament-modal-content .tournament-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 20px;
+}
+
+.tournament-modal-content .tournament-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+
+  min-width: 120px;
+}
+
+#team-action-modal .tournament-actions {
+  align-items: center;
+}
+
+#team-action-modal .tournament-button {
+  line-height: 1;
 }
