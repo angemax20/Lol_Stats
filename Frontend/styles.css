@@ -2859,25 +2859,3 @@ body {
   color: #ffb4b4;
   font-weight: 800;
 }
-
-.favorite-card-main {
-  display: grid;
-  grid-template-columns: 64px 1fr;
-  align-items: center;
-  gap: 16px;
-
-  width: 100%;
-
-  background: transparent;
-  border: none;
-
-  color: inherit;
-
-  text-align: left;
-
-  cursor: pointer;
-}
-
-.favorite-card-main:hover h3 {
-  color: #8dfc3f;
-}

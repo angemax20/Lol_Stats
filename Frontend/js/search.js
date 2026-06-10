@@ -390,32 +390,32 @@ async function toggleFavorite(summonerId) {
     console.error(data);
     showSearchError(data.error || 'No se pudo actualizar favoritos.');
     return;
-    }
-
-    function loadSummonerFromUrl() {
-    const params = new URLSearchParams(window.location.search);
-
-    const summonerName = params.get('summoner');
-    const region = params.get('region');
-
-    if (!summonerName) return;
-
-    const summonerInput = document.getElementById('summoner-name');
-    const regionSelect = document.getElementById('region-select');
-
-    if (summonerInput) {
-      summonerInput.value = summonerName;
-    }
-
-    if (regionSelect && region) {
-      regionSelect.value = region;
-    }
-
-    searchSummoner();
   }
-
-  loadSummonerFromUrl();
 
   button.classList.toggle('active');
   button.textContent = isFavorite ? 'Favorito' : 'Favorito guardado';
 }
+
+function loadSummonerFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+
+  const summonerName = params.get('summoner');
+  const region = params.get('region');
+
+  if (!summonerName) return;
+
+  const summonerInput = document.getElementById('summoner-name');
+  const regionSelect = document.getElementById('region-select');
+
+  if (summonerInput) {
+    summonerInput.value = summonerName;
+  }
+
+  if (regionSelect && region) {
+    regionSelect.value = region;
+  }
+
+  searchSummoner();
+}
+
+loadSummonerFromUrl();
