@@ -67,9 +67,8 @@ async function loadFavorites() {
           <p>${summoner.region} · Nivel ${summoner.level}</p>
           <strong>${summoner.soloq_tier || 'Sin rango'} ${summoner.soloq_rank || ''} · ${summoner.soloq_lp || 0} LP</strong>
         </div>
-
-        <button onclick="removeFavorite(${summoner.id})">
-          Quitar
+        <button class="favorite-button" onclick="removeFavorite(${summoner.id})">
+        Quitar
         </button>
       </article>
     `;
