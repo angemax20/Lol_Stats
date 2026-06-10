@@ -585,7 +585,7 @@ function advanceTeam(roundIndex, matchIndex, slot) {
   const nextSourceKey = nextSlot === 'A' ? 'sourceA' : 'sourceB';
 
   if (nextMatch[nextTeamKey]) {
-    alert('Ese espacio de la siguiente fase ya está ocupado.');
+    showTournamentToast('Ese puesto en la siguiente ronda ya está ocupado.', 'error');
     return;
   }
 
