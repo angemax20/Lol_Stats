@@ -3,6 +3,7 @@ let currentBracket = null;
 let openedSavedTournamentId = null;
 let selectedTeamAction = null;
 let pendingDeleteTournamentId = null;
+let openedBracketCache = null;
 
 function showOnlyStep(stepId) {
   const steps = [
@@ -58,13 +59,6 @@ function goBackToMode() {
 }
 
 function closeBracket() {
-  currentBracket = null;
-  openedSavedTournamentId = null;
-
-  const bracket = document.getElementById('bracket');
-
-  if (bracket) bracket.innerHTML = '';
-
   showOnlyStep('step-size');
 }
 
@@ -252,6 +246,7 @@ function renderBracket(bracket) {
   if (!bracketContainer) return;
 
   currentBracket = bracket;
+  openedBracketCache = bracket;
 
   showOnlyStep('step-bracket');
 
@@ -480,28 +475,22 @@ function showTournamentToast(message, type = 'success') {
 }
 
 function toggleSavedTournament(tournamentId, bracket) {
-  if (openedSavedTournamentId === tournamentId) {
+  const bracketStep = document.getElementById('step-bracket');
+  const isOpen = bracketStep && !bracketStep.classList.contains('hidden');
+
+  if (openedSavedTournamentId === tournamentId && isOpen) {
     closeBracket();
     return;
   }
 
   openedSavedTournamentId = tournamentId;
+
+  if (openedBracketCache && openedSavedTournamentId === tournamentId) {
+    renderBracket(openedBracketCache);
+    return;
+  }
+
   renderBracket(bracket);
-}
-
-function renderTeamSlot(roundIndex, matchIndex, slot, teamName, locked) {
-  const disabled = !teamName ? 'disabled' : '';
-  const lockedClass = locked ? 'locked' : '';
-
-  return `
-    <button
-      class="bracket-team ${lockedClass}"
-      ${disabled}
-      onclick="openTeamActions(${roundIndex}, ${matchIndex}, '${slot}')"
-    >
-      ${teamName || 'Pendiente'}
-    </button>
-  `;
 }
 
 function openTeamActions(roundIndex, matchIndex, slot) {
