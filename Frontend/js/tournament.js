@@ -318,6 +318,21 @@ async function saveTournament(bracket) {
   loadSavedTournaments();
 }
 
+function renderTeamSlot(roundIndex, matchIndex, slot, teamName, locked) {
+  const disabled = !teamName ? 'disabled' : '';
+  const lockedClass = locked ? 'locked' : '';
+
+  return `
+    <button
+      class="bracket-team ${lockedClass}"
+      ${disabled}
+      onclick="openTeamActions(${roundIndex}, ${matchIndex}, '${slot}')"
+    >
+      ${teamName || 'Pendiente'}
+    </button>
+  `;
+}
+
 async function loadSavedTournaments() {
   const container = document.getElementById('saved-tournaments');
   const userId = localStorage.getItem('user_id');
