@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Campeones</title>
+  <title>Favoritos</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -17,33 +17,13 @@
     <div class="nav-item" onclick="window.location.href='tournament.html'">Torneos</div>
   </div>
 
-  <main class="champions-page">
-    <h1 class="champions-title">Campeones</h1>
+  <main class="favorites-page">
+    <h1 class="favorites-title">Favoritos</h1>
 
-    <div class="champions-search-panel">
-      <input
-        type="text"
-        id="champion-search"
-        class="champion-search-input"
-        placeholder="Buscar campeón"
-        autocomplete="off"
-      >
-    </div>
-
-    <div id="champions-grid" class="champions-gallery"></div>
+    <section id="favorites-list" class="favorites-list"></section>
   </main>
 
-  <div class="champions-search-panel">
-
-  <div id="build-modal" class="build-modal">
-    <div class="build-modal-content">
-      <button class="build-modal-close" onclick="closeBuildModal()">×</button>
-
-      <div id="build-content"></div>
-    </div>
-  </div>
-
-  <script src="js/champions.js"></script>
+  <script src="js/favorites.js"></script>
 
 </body>
 </html>

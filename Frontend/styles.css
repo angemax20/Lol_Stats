@@ -2773,3 +2773,89 @@ body {
 #team-action-modal .tournament-button {
   line-height: 1;
 }
+
+/* // FAVORITOS */
+
+.favorites-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 150px 40px 60px;
+  background: #020403;
+  color: white;
+}
+
+.favorites-title {
+  margin: 0 0 38px;
+  text-align: center;
+  font-size: 44px;
+  color: #8dfc3f;
+  text-shadow:
+    0 0 12px rgba(141, 252, 63, 0.65),
+    0 0 28px rgba(141, 252, 63, 0.35);
+}
+
+.favorites-list {
+  width: min(900px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 14px;
+}
+
+.favorite-card {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: linear-gradient(180deg, #102015 0%, #07110a 100%);
+  border: 1px solid rgba(141, 252, 63, 0.28);
+  border-radius: 16px;
+}
+
+.favorite-card img {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  border: 2px solid rgba(141, 252, 63, 0.42);
+}
+
+.favorite-card h3 {
+  margin: 0 0 6px;
+  color: #f8fff4;
+}
+
+.favorite-card p {
+  margin: 0 0 6px;
+  color: #9fb69d;
+}
+
+.favorite-card strong {
+  color: #caff9a;
+}
+
+.favorite-card button,
+.favorite-button {
+  height: 42px;
+  padding: 0 16px;
+  background: #020403;
+  border: 1px solid rgba(141, 252, 63, 0.42);
+  border-radius: 12px;
+  color: #caff9a;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.favorite-card button:hover,
+.favorite-button:hover,
+.favorite-button.active {
+  border-color: rgba(141, 252, 63, 0.82);
+  box-shadow:
+    0 0 0 3px rgba(141, 252, 63, 0.12),
+    0 0 24px rgba(141, 252, 63, 0.26);
+}
+
+.favorites-empty {
+  text-align: center;
+  color: #ffb4b4;
+  font-weight: 800;
+}

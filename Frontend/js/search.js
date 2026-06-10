@@ -268,6 +268,14 @@ function showSummoner(summoner) {
 
           <h2>${summoner.name}${summoner.tag_line ? '#' + summoner.tag_line : ''}</h2>
 
+          <button
+            id="favorite-button"
+            class="favorite-button"
+            onclick="toggleFavorite(${summoner.id})"
+          >
+            Favorito
+          </button>
+
           <p class="summoner-level">Nivel: ${summoner.level}</p>
           <p class="summoner-region">Región: ${summoner.region.toUpperCase()}</p>
           <p class="summoner-lastseen">Última conexión: ${timeAgo}</p>
@@ -350,4 +358,38 @@ function getTimeAgo(date) {
   if (diffInSeconds < 604800) return `Hace ${Math.floor(diffInSeconds / 86400)} días`;
 
   return `Hace ${Math.floor(diffInSeconds / 604800)} semanas`;
+}
+
+async function toggleFavorite(summonerId) {
+  const userId = localStorage.getItem('user_id');
+
+  if (!userId) {
+    showSearchError('Debes iniciar sesión para guardar favoritos.');
+    return;
+  }
+
+  const button = document.getElementById('favorite-button');
+  const isFavorite = button.classList.contains('active');
+
+  const response = await fetch(`${API_URL}/favorites`, {
+    method: isFavorite ? 'DELETE' : 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      user_id: userId,
+      summoner_id: summonerId
+    })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    console.error(data);
+    showSearchError(data.error || 'No se pudo actualizar favoritos.');
+    return;
+  }
+
+  button.classList.toggle('active');
+  button.textContent = isFavorite ? 'Favorito' : 'Favorito guardado';
 }
